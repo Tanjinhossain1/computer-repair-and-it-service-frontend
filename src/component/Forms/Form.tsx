@@ -14,7 +14,7 @@ type FormProps = {
   style?: any;
 } & FormConfig;
 
-const CustomForm = ({
+const Form = ({
   children,
   submitHandler,
   defaultValues,
@@ -47,4 +47,4 @@ const CustomForm = ({
   );
 };
 
-export default CustomForm;
+export default Form;

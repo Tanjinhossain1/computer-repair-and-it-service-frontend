@@ -1,6 +1,7 @@
 import { authKey } from "@/constants/storageKey";
 import { ResponseErrorType, ResponseSuccessType } from "@/types";
 import { getTOLocalStorage } from "@/utils/local-storage";
+import { message } from "antd";
 import axios from "axios";
 
 
@@ -31,13 +32,14 @@ instance.interceptors.response.use(function (response) {
         meta: response?.data?.meta
     }
     return responseObject;
-  }, function (error) {
+  }, function (error) { 
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     const responseObject: ResponseErrorType = {
         statusCode: error?.response?.data?.statusCode || 500,
         message: error?.response?.data?.message || "SomeThing Went Wrong",
         errorMessages: error?.response?.data?.messages
     }
+    message.error(responseObject.message, 2)
     return responseObject
     // return Promise.reject(error);
   });

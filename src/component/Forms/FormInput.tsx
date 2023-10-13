@@ -12,6 +12,7 @@ interface IInput {
   placeholder?: string;
   validation?: object;
   label?: string;
+  prefix?: any;
 }
 
 const FormInput = ({
@@ -23,6 +24,7 @@ const FormInput = ({
   placeholder,
   validation,
   label,
+  prefix
 }: IInput) => {
   const { control, formState: { errors } } = useFormContext();
 
@@ -30,13 +32,14 @@ const FormInput = ({
 
   return (
     <>
-      <span style={{marginRight: "8px"}}>{label ? label : null}</span>
+      <span >{label ? label : null}</span>
       <Controller
         control={control}
         name={name}
         render={({ field }) =>
           type === "password" ? (
             <Input.Password
+            prefix={prefix}
               type={type}
               size={size}
               placeholder={placeholder}
@@ -45,6 +48,7 @@ const FormInput = ({
             />
           ) : (
             <Input
+            prefix={prefix}
               type={type}
               size={size}
               placeholder={placeholder}
