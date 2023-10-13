@@ -1,9 +1,8 @@
 'use client'
 import React,{useState} from 'react' 
-import { Input, Button, Select, DatePicker, Radio, Row, Col, message } from 'antd';
+import {  Button, Radio, Row, Col, message } from 'antd';
 import { UserOutlined, MailOutlined, PhoneOutlined, FileImageOutlined, LockOutlined } from '@ant-design/icons';
-import Link from 'next/link';
-import CustomForm from '../Forms/Form';
+import Link from 'next/link'; 
 import { SubmitHandler } from 'react-hook-form';
 import { useUserCreateMutation } from '@/redux/api/registerApi';
 import { useRouter } from 'next/navigation';
@@ -11,6 +10,8 @@ import Form from '../Forms/Form';
 import FormInput from '../Forms/FormInput';
 import FormDatePicker from '../Forms/DatePicker';
 import moment from 'moment'
+import { yupResolver } from '@hookform/resolvers/yup'; 
+import registerValidationSchema from '@/schemas/register';
 
 type FormValues = {
     email: string;
@@ -50,6 +51,7 @@ export default function RegisterForm() {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <Form
     submitHandler={onSubmit}
+    resolver={yupResolver(registerValidationSchema)}
     //   onFinish={onFinish}
       style={{ width: '400px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
@@ -87,6 +89,7 @@ export default function RegisterForm() {
           <Radio.Group
             name="gender"
             onChange={(e)=>setGender(e.target.value)}
+
           >
             <Radio name='gender' value="male">Male</Radio>
             <Radio value="female">Female</Radio>
