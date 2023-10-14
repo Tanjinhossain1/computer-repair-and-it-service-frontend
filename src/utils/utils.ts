@@ -1,13 +1,22 @@
 
 export const TrimToUpperCase = (value: string) =>{
+  if (value === null || value === undefined) {
+    return ''; // or handle it in some other way based on your requirements
+  }
     return value.trim().toUpperCase().replace(/_/g, '-')
 }
 
 export const TrimToUpperCaseWithSpace = (value: string) =>{
+  if (value === null || value === undefined) {
+    return ''; // or handle it in some other way based on your requirements
+  }
     return value.trim().replace(/_/g, '-').split('').join(' ').toUpperCase();
 }
 
 export const TrimToLowerCase = (value: string) =>{
+  if (value === null || value === undefined) {
+    return ''; // or handle it in some other way based on your requirements
+  }
     return value.trim().toLowerCase()
 }
 

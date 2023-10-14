@@ -1,3 +1,4 @@
+import NavbarComponent from "@/component/Common/Navbar";
 import LoginForm from "@/component/Login";
 import { Metadata } from "next"; 
  
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
 const LoginPage = () => {
    
   return (
+    <>
+    <NavbarComponent />
     <LoginForm />
+    </>
   );
 };
 

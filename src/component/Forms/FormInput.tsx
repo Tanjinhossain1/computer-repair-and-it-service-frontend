@@ -13,6 +13,7 @@ interface IInput {
   validation?: object;
   label?: string;
   prefix?: any;
+  style?: any;
 }
 
 const FormInput = ({
@@ -24,22 +25,27 @@ const FormInput = ({
   placeholder,
   validation,
   label,
-  prefix
+  prefix,
+  style,
 }: IInput) => {
-  const { control, formState: { errors } } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
-  const errorMessage = getErrorMessageByPropertyName(errors,name)
+  const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
     <>
-      <span >{label ? label : null}</span>
+      <span>{label ? label : null}</span>
       <Controller
         control={control}
         name={name}
         render={({ field }) =>
           type === "password" ? (
             <Input.Password
-            prefix={prefix}
+              style={{ ...style }}
+              prefix={prefix}
               type={type}
               size={size}
               placeholder={placeholder}
@@ -48,7 +54,8 @@ const FormInput = ({
             />
           ) : (
             <Input
-            prefix={prefix}
+              style={{ ...style }}
+              prefix={prefix}
               type={type}
               size={size}
               placeholder={placeholder}
@@ -58,9 +65,7 @@ const FormInput = ({
           )
         }
       />
-      <small style={{color:"red"}}>
-        {errorMessage}
-      </small>
+      <small style={{ color: "red" }}>{errorMessage}</small>
     </>
   );
 };

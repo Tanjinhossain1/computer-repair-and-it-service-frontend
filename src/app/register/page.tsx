@@ -1,3 +1,4 @@
+import NavbarComponent from '@/component/Common/Navbar'
 import RegisterForm from '@/component/Register'
 import { Metadata } from 'next'
 import React from 'react'
@@ -10,6 +11,9 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
+ <>
+    <NavbarComponent />
     <RegisterForm />
+ </>
   )
 }
