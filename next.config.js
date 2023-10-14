@@ -8,6 +8,6 @@
   
 module.exports = {
     images: {
-      domains: ['demo.brothersthemes.com'],
+      domains: ['demo.brothersthemes.com','res.cloudinary.com'],
     },
   };

@@ -37,7 +37,7 @@ export default function LatestNews() {
 
           <Row gutter={16}>
             {news.map((newsItem) => (
-              <Col span={6} key={newsItem.id}>
+              <Col lg={6} key={newsItem.id}>
                 <Card title={<h3>{newsItem.title}</h3>}>
                   <p>{newsItem.content}</p>
                 </Card>

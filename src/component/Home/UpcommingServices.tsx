@@ -8,7 +8,7 @@ export default function UpComingServices() {
 }}>
       <h1 style={{ textAlign: "center",marginBottom: "10px" }}>Up Coming Services</h1>
       <Row >
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -22,7 +22,7 @@ export default function UpComingServices() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -36,7 +36,7 @@ export default function UpComingServices() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -50,7 +50,7 @@ export default function UpComingServices() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}

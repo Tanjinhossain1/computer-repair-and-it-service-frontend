@@ -13,7 +13,7 @@ export default function RegisterPage() {
   return (
  <>
     <NavbarComponent />
-    <RegisterForm />
+    <RegisterForm role='user' redirect='/login' />
  </>
   )
 }

@@ -1,24 +1,26 @@
-'use client'
-import Image from 'next/image'
-import styles from './page.module.css'
-import NavbarComponent from '@/component/Common/Navbar'
-import HeaderComponent from '@/component/Home/Header'
-import AvailableServices from '@/component/Home/AvailableServices'
-import UpComingServices from '@/component/Home/UpcommingServices'
-import EventsByCategory from '@/component/Home/EventsByCategory' 
-import Review from '@/component/Home/Review'
-import LatestNews from '@/component/Home/LatestNews'
-import FooterComponent from '@/component/Home/Footer'
-import Trusted from '@/component/Home/Trusted'
-import ChooseUs from '@/component/Home/ChooseUs'
-  
-  
-export default function Home() {
+"use client";
+import NavbarComponent from "@/component/Common/Navbar";
+import HeaderComponent from "@/component/Home/Header";
+import AvailableServices from "@/component/Home/AvailableServices";
+import UpComingServices from "@/component/Home/UpcommingServices";
+import EventsByCategory from "@/component/Home/EventsByCategory";
+import Review from "@/component/Home/Review";
+import LatestNews from "@/component/Home/LatestNews";
+import FooterComponent from "@/component/Home/Footer";
+import Trusted from "@/component/Home/Trusted";
+import ChooseUs from "@/component/Home/ChooseUs";
+import dynamic from "next/dynamic";
+
+export  function Home() {
   return (
-     <> 
+    <div>
       <NavbarComponent />
-      <HeaderComponent />
-      <AvailableServices />
+      <div>
+        <HeaderComponent />
+      </div>
+      <div style={{marginTop:"-150px"}}>
+        <AvailableServices />
+      </div>
       <UpComingServices />
       <EventsByCategory />
       <Review />
@@ -26,6 +28,7 @@ export default function Home() {
       <Trusted />
       <ChooseUs />
       <FooterComponent />
-     </>
-  )
-} 
+    </div>
+  );
+}
+export default dynamic (() => Promise.resolve(Home), {ssr: false})

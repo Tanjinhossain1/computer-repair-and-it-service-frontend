@@ -4,10 +4,7 @@ const registerValidationSchema = yup.object().shape({
     password: yup
     .string()
     .required('Password is required')
-    .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-        'Must be one Special, number, alphabet charactes (@, 0, a)'
-      )
+     
     .min(6, 'Password must be at least 6 characters')
     .max(20, 'Password must not exceed 20 characters'),
   firstName: yup.string().required('First Name is required'),

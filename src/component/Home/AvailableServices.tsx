@@ -4,11 +4,11 @@ import React from "react";
 
 export default function AvailableServices() {
   return (
-    <div style={{padding: "10px",width:"80%",margin: "auto", border: "3px solid #d6d6d6",borderRadius: 5,marginTop: '5px', boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`
+    <div style={{padding: "10px",width:"80%",margin: "auto", border: "3px solid #d6d6d6",borderRadius: 5,marginTop: '5px', boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,backgroundColor:"white"
 }}>
       <h1 style={{ textAlign: "center",marginBottom: "10px" }}>Available Services</h1>
-      <Row >
-        <Col span={6}>
+      <Row>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -22,7 +22,7 @@ export default function AvailableServices() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -36,7 +36,7 @@ export default function AvailableServices() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -50,7 +50,7 @@ export default function AvailableServices() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}

@@ -3,6 +3,7 @@ import React from "react";
 import {
   Avatar,
   Button,
+  Col,
   Dropdown,
   Layout,
   Menu,
@@ -22,10 +23,12 @@ const { Header: AntHeader, Content, Footer } = Layout;
 
 export default function NavbarComponent() {
   const router = useRouter();
+
   const logOut = () => {
     removeLocalStorageInfo(authKey);
     router.push("/login");
   };
+
   const items: MenuProps["items"] = [
     {
       key: "0",
@@ -36,6 +39,7 @@ export default function NavbarComponent() {
       ),
     },
   ];
+
   const { role } = getUserInfo() as any;
   return (
     <AntHeader
@@ -43,28 +47,54 @@ export default function NavbarComponent() {
         background: `linear-gradient(45deg, #0072ff, #00c6ff)`,
       }}
     >
-
       <Row justify={"end"} align={"middle"}>
-      {
-        role ? null : 
-      <>
-      <Space style={{ marginRight: 10, fontWeight: 600, color: "white" }}>
-         <Link style={{color: 'white'}} href='/login'>Login</Link> 
-      </Space>
+        <Col
+          lg={1}
+          style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+        >
+          <Link style={{ color: "white" }} href="/">
+            Home
+          </Link>
+        </Col>
+        {role ? null : (
+          <>
+            <Col
+              lg={1}
+              style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+            >
+              <Link style={{ color: "white" }} href="/login">
+                Login
+              </Link>
+            </Col>
 
-      <Space style={{ marginRight: 10, fontWeight: 600, color: "white" }}> 
-         <Link style={{color: 'white'}} href='/register'>Register</Link>
-      </Space>
-      </>
-    }
-
-        <Space style={{ marginRight: 10, fontWeight: 600, color: "white" }}>
+            <Col
+              lg={1}
+              style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+            >
+              <Link style={{ color: "white" }} href="/register">
+                Register
+              </Link>
+            </Col>
+          </>
+        )}
+        {role === "super_admin" ? (
+          <Col
+            lg={3}
+            style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+          >
+            <Link style={{ color: "white" }} href={`${role}/profile`}>
+              Dashboard
+            </Link>
+          </Col>
+        ) : null}
+        <Col
+          lg={role === "super_admin" ? 3 : 1}
+          style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+        >
           {TrimToUpperCaseWithSpace(role)}
-        </Space>
+        </Col>
         <Dropdown menu={{ items }}>
-          <p>
-            <Avatar size="large" icon={<UserOutlined />} />
-          </p>
+          <Avatar size="large" icon={<UserOutlined />} />
         </Dropdown>
       </Row>
     </AntHeader>

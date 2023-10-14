@@ -19,3 +19,24 @@ export interface IGenericErrorMessages {
     path: string | number;
     message: string
 } 
+export type IUser = {
+    id: number;
+    password: string;
+    role: string;
+    firstName: string;
+    lastName: string;
+    middleName?: string | null;
+    dateOfBirth: string;
+    gender?: string | null;
+    bloodGroup?: string | null;
+    email: string;
+    contactNo: string;
+    emergencyContactNo?: string | null;
+    presentAddress?: string | null;
+    permanentAddress?: string | null;
+    roleBasedPermission?: string | null;
+    profileImage?: string | null;
+    createAt: Date;
+    updateAt: Date;
+  };
+  

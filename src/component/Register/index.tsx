@@ -24,7 +24,7 @@ type FormValues = {
     middleName: string;
   };
 
-export default function RegisterForm() {
+export default function RegisterForm({role,redirect}:{role:string,redirect:string}) {
     const [userCreate] = useUserCreateMutation();
     const router = useRouter();
     const [gender,setGender] = useState<string>("")
@@ -33,18 +33,22 @@ export default function RegisterForm() {
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
       try {
         console.log('submission registration data ', data);
-        const finalData = {...data,dateOfBirth: moment(data.dateOfBirth).toISOString() , gender,permanentAddress:"",role: "user"}
+        const finalData = {...data,dateOfBirth: moment(data.dateOfBirth).toISOString() , gender,permanentAddress:"",role: role}
         console.log('final registration data ', finalData);
         const res = await userCreate({...finalData}).unwrap();
         
         if(res){
-          router.push('/login')
-          message.success("User Login Success",1)
+          router.push(redirect)
+          if(role === 'admin'){
+            message.success("Admin Create Success",1)
+          }else{
+            message.success("User Login Success",1)
+          }
         } 
 
       } catch (err: any) {
         console.log('error', err.message)
-        message.error("login")
+        message.error("error")
     }
     };
   return (
@@ -55,7 +59,10 @@ export default function RegisterForm() {
     //   onFinish={onFinish}
       style={{ width: '400px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
+      {
+        role === 'admin' ? <h1 style={{ textAlign: 'center', color: '#1890ff' }}>Create Admin</h1> :
       <h1 style={{ textAlign: 'center', color: '#1890ff' }}>Registration</h1>
+      }
 
       <Row gutter={[16, 16]}>
         <Col span={12}>
@@ -119,13 +126,16 @@ export default function RegisterForm() {
           />
         </Col>
       </Row>
-      <p style={{ textAlign: 'center',margin: 0,padding:0,marginTop: '5px',marginBottom: '5px' }}>
+      {
+        role === 'admin' ? null :
+      <p style={{ textAlign: 'center',margin: 0,padding:0,marginTop: '5px'}}>
           Already have an account? <Link href="/login" style={{ color: '#1890ff',margin: 0,padding:0 }}>Login</Link>
     </p>
+      }
       <Button
         type="primary"
         htmlType="submit"
-        style={{ width: '100%', backgroundColor: '#1890ff', border: 'none', borderRadius: '5px', marginTop: '2px' }}
+        style={{ width: '100%', backgroundColor: '#1890ff', border: 'none', borderRadius: '5px', marginTop: '5px' }}
       >
         Register
       </Button>

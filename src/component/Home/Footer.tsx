@@ -51,13 +51,13 @@ export default function FooterComponent() {
         <Col xs={24} sm={24} md={8} lg={8} xl={8}>
         <h2 style={{color:"white",marginTop:"20px"}}>WORKING HOURS</h2>
         <div style={{color:'#dedcdd',marginTop:"30px"}}>
-            <p>Monday  ...................... <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
-            <p>Tuesday ...................... <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
-            <p>Wednesday ..................<span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
-            <p>Thursday .....................<span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
-            <p>Friday ......................... <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
-            <p>Saturday ..................... <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
-            <p>Sunday ............................... <span style={{marginLeft:"20px"}}>Closed</span> </p>
+            <p>Monday  ................. <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
+            <p>Tuesday ................. <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
+            <p>Wednesday .............<span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
+            <p>Thursday ................<span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
+            <p>Friday .................... <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
+            <p>Saturday ................ <span style={{marginLeft:"20px"}}>9:00 - 19:00</span> </p>
+            <p>Sunday .......................... <span style={{marginLeft:"20px"}}>Closed</span> </p>
         </div>
         </Col>
       </Row>

@@ -11,7 +11,7 @@ export default function EventsByCategory() {
       <br />
       <br />
       <Row >
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -25,7 +25,7 @@ export default function EventsByCategory() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -39,7 +39,7 @@ export default function EventsByCategory() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}
@@ -53,7 +53,7 @@ export default function EventsByCategory() {
              <Button type="primary" style={{width:"100%"}}>Book</Button>
           </Card> 
         </Col>
-        <Col span={6}>
+        <Col lg={6}>
           <Card
             hoverable
             style={{ width: 240 }}

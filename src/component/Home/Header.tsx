@@ -10,7 +10,7 @@ const { Title, Paragraph } = Typography;
 
 const HeaderComponent = () => {
   return (
-    <div style={{backgroundColor: "#22264b"}} className="banner">
+    <div style={{backgroundColor: "#22264b",paddingBottom:"200px"}} className="banner">
       <div className="text-container">
         <h2 style={{color: 'white'}}>Unable to work? Your computer freezes?</h2>
         <h1 style={{color: 'white'}}>We{`'`}ll help you get back to work.</h1>

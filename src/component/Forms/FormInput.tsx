@@ -34,7 +34,7 @@ const FormInput = ({
   } = useFormContext();
 
   const errorMessage = getErrorMessageByPropertyName(errors, name);
-
+  control._defaultValues[name]=value ? value : ""
   return (
     <>
       <span>{label ? label : null}</span>
@@ -50,7 +50,7 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               {...field}
-              value={value ? value : field.value}
+              value={ field.value} 
             />
           ) : (
             <Input
@@ -59,8 +59,8 @@ const FormInput = ({
               type={type}
               size={size}
               placeholder={placeholder}
-              {...field}
-              value={value ? value : field.value}
+              {...field} 
+              value={ field.value ? field.value : ""}
             />
           )
         }
