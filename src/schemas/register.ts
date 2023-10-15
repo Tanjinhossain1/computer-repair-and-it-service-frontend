@@ -4,7 +4,6 @@ const registerValidationSchema = yup.object().shape({
     password: yup
     .string()
     .required('Password is required')
-     
     .min(6, 'Password must be at least 6 characters')
     .max(20, 'Password must not exceed 20 characters'),
   firstName: yup.string().required('First Name is required'),
@@ -20,7 +19,6 @@ const registerValidationSchema = yup.object().shape({
         /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}[^.]+[A-Za-z]+$/,
         'Invalid email format'
       ),
-
   contactNo: yup.string().required('Contact Number is required'),
 });
 

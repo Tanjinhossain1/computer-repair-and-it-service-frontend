@@ -25,7 +25,7 @@ onChangeFunc,
     onChangeFunc ? onChangeFunc(date,dateString) : null;
     setValue(name,dateString)
   };
-  control._defaultValues[name] = value
+  control._defaultValues[name] = value ? value : dayjs() 
   return (
     <>
       {label ? label : null}
@@ -34,7 +34,7 @@ onChangeFunc,
         control={control}
         name={name}
         render={({ field }) =>
-        <DatePicker  showTime={false}   style={{width: "100%"}} size={size} value={dayjs(field.value)|| ""} onChange={onChange} />
+        <DatePicker  showTime={false}   style={{width: "100%"}} size={size} value={dayjs(field.value )|| ""} onChange={onChange} />
 
         }
       />

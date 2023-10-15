@@ -33,7 +33,7 @@ const Form = ({
   const onSubmit = (data: any) => {
     console.log(data);
     submitHandler(data);
-    reset();
+    // reset();
   };
 
   useEffect(() => {

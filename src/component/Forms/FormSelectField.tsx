@@ -30,7 +30,7 @@ const FormSelectField = ({
   handleChange,
 }: SelectFieldProps) => {
   const { control } = useFormContext();
-
+control._defaultValues[name] = value ? value : ""
   return (
     <>
       {label ? label : null}

@@ -1,68 +1,28 @@
 "use client";
-import TableListViewer from "@/component/Common/TableListViewer";
-import UMBreadCrumb from "@/component/Common/UMBreadCrumb";
+import { authKey } from "@/constants/storageKey";
 import { useAllUserQuery, useDeleteTheUserMutation } from "@/redux/api/userApi";
 import { useDebounced } from "@/redux/hooks";
 import { getUserInfo, removeLocalStorageInfo } from "@/services/auth.service";
-import { IMeta, IUser } from "@/types";
-import { TrimToUpperCase } from "@/utils/utils";
+import { IMeta } from "@/types";
+import { Button, Input, Popover, message } from "antd";
+import dayjs from "dayjs";
 import {
   DeleteOutlined,
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { Button, Input, Popover, message } from "antd";
-import Link from "next/link";
-import React, { useState } from "react";
-import dayjs from "dayjs";
-import {
-  useAddAdminMutation,
-  useAddAdminRoleMutation,
-  useAdminsQuery,
-} from "@/redux/api/admin";
+import UMBreadCrumb from "@/component/Common/UMBreadCrumb";
+import { useState } from "react";
 import RegisterForm from "@/component/Register";
-import Form from "@/component/Forms/Form";
-import FormInput from "@/component/Forms/FormInput";
+import TableListViewer from "@/component/Common/TableListViewer";
 import { useRouter } from "next/navigation";
-import { authKey } from "@/constants/storageKey";
+import Link from "next/link";
+import EditProfile from "@/component/Common/EditProfile";
 
-const AdminRoleForm = ({ id }: { id: any }) => {
-  const [addAdminRole] = useAddAdminRoleMutation();
-
-  const onSubmit = async (data: { roleBasedPermission: string }) => {
-    console.log("first id ", id, data);
-    message.loading("Adding.....", 1);
-    console.log(data);
-    try {
-      await addAdminRole({ id, body: data });
-      message.success("Role Add successfully", 1);
-    } catch (err: any) {
-      message.error(err.message);
-    }
-  };
-  return (
-    <div>
-      <Form submitHandler={onSubmit}>
-        <FormInput
-          type="text"
-          name="roleBasedPermission"
-          size="large"
-          placeholder="Give Role"
-        />
-        <br />
-        <br />
-        <Button type="primary" htmlType="submit">
-          Add Role
-        </Button>
-      </Form>
-    </div>
-  );
-};
-
-export default function ManageAdminRole() {
+export default function UserManagePage() {
   const { role } = getUserInfo() as any;
   const history = useRouter();
-  if (role !== "super_admin") {
+  if (role !== "admin") {
     removeLocalStorageInfo(authKey);
     history.push("/login");
   }
@@ -73,6 +33,7 @@ export default function ManageAdminRole() {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [openPopover, setOpenPopover] = useState<boolean>(false);
 
   query["limit"] = size;
   query["page"] = page;
@@ -88,18 +49,20 @@ export default function ManageAdminRole() {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  const deleteAdmin = async (id: number) => {
+  const deleteUser = async (id: number) => {
     message.loading("Deleting.....", 1);
     try {
+      //   console.log(data);
       await deleteTheUser({ id });
       message.success("Deleted successfully", 1);
     } catch (err: any) {
+      //   console.error(err.message);
       message.error(err.message);
     }
   };
-  const { data, isLoading } = useAdminsQuery({ ...query });
+  const { data, isLoading } = useAllUserQuery({ ...query });
   //@ts-ignore
-  const admin: IUser[] = data?.admins;
+  const user: IUser[] = data?.users;
   const meta: IMeta | undefined = data?.meta;
   const columns = [
     {
@@ -123,10 +86,6 @@ export default function ManageAdminRole() {
       dataIndex: "email",
     },
     {
-      title: "Role",
-      dataIndex: "roleBasedPermission",
-    },
-    {
       title: "Created at",
       dataIndex: "createAt",
       render: function (data: any) {
@@ -140,15 +99,18 @@ export default function ManageAdminRole() {
     },
     {
       title: "Action",
-      dataIndex: "id",
+      dataIndex: "",
 
       render: function (data: any) {
         return (
-          <>
-            <Popover content={<AdminRoleForm id={data} />} trigger="click">
-              <Button type="primary">Add Admin Role</Button>
+          <> 
+            <Popover key={data?.id} trigger={'click'} content={<EditProfile setOpenPopover={setOpenPopover} data={data} />}>
+              <Button  type="primary">
+                <EditOutlined />
+              </Button>
             </Popover>
-            <Button onClick={() => deleteAdmin(data)} type="primary" danger>
+
+            <Button onClick={() => deleteUser(data?.id)} type="primary" danger>
               <DeleteOutlined />
             </Button>
           </>
@@ -182,12 +144,12 @@ export default function ManageAdminRole() {
             link: `/${role}/profile`,
           },
           {
-            label: `manage-admin-role`,
-            link: `/${role}/manage-admin-role`,
+            label: `manage-user`,
+            link: `/${role}/manage-user`,
           },
         ]}
       />
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           size="large"
           placeholder="Search"
@@ -196,28 +158,43 @@ export default function ManageAdminRole() {
             width: "20%",
           }}
         />
-        {(!!sortBy || !!sortOrder || !!searchTerm) && (
-          <Button
-            style={{ margin: "0px 5px" }}
-            type="primary"
-            onClick={resetFilters}
+        <div style={{ marginRight: "40px" }}>
+          <Popover
+            content={
+              <RegisterForm
+                isPopover
+                role="user"
+                redirect="/admin/manage-user"
+              />
+            }
+            trigger="click"
           >
-            <ReloadOutlined />
-          </Button>
-        )}
+            <Button type="primary">Create User</Button>
+          </Popover>
+
+          {(!!sortBy || !!sortOrder || !!searchTerm) && (
+            <Button
+              style={{ margin: "0px 5px" }}
+              type="primary"
+              onClick={resetFilters}
+            >
+              <ReloadOutlined />
+            </Button>
+          )}
+        </div>
       </div>
-      <h1 style={{ textAlign: "center" }}>List Of User For Make Admin </h1>
+      <h1 style={{ textAlign: "center" }}>List Of User For Manage </h1>
       <div style={{ margin: "10px" }}>
         <TableListViewer
           loading={isLoading}
           columns={columns}
-          tableRow={admin}
+          tableRow={user}
           paginationConfig={{
             onChange: onPaginationChange,
             pageSize: size,
             total: meta?.total,
             showSizeChanger: true,
-            pageSizeOptions: [15, 25, 35, 50],
+            pageSizeOptions: [10, 15, 25, 35, 50],
           }}
           onChange={onTableChange}
         />

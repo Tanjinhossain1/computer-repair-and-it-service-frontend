@@ -44,9 +44,9 @@ export const bloodGroupOptions = [
 ];
 export default function EditProfile({ data , setOpenPopover}: { data: any,setOpenPopover:any }) {
   const [unFormatFile, setUnFormatFile] = useState<any>(null);
-  const [profileImage, setProfileImage] = useState<string | null>(data?.profileImage);
+  const [profileImage, setProfileImage] = useState<string | null>(data?.profileImage ? data?.profileImage : "");
   const [updateProfile] = useUpdateProfileMutation();
-
+    console.log('first  ', data)
   useEffect(()=>{
     if(unFormatFile){ 
             const fileData = new FormData();
@@ -81,7 +81,7 @@ export default function EditProfile({ data , setOpenPopover}: { data: any,setOpe
     console.log('body ',body)
     try {
       await updateProfile({ id: data?.id, body });
-      message.success("Profile Updated successfully", 1); 
+      message.success("Profile Updated successfully", 1);  
       setOpenPopover(false)
     } catch (err: any) {
       message.error(err.message);

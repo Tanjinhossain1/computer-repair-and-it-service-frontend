@@ -1,73 +1,36 @@
 "use client";
 import TableListViewer from "@/component/Common/TableListViewer";
 import UMBreadCrumb from "@/component/Common/UMBreadCrumb";
-import { useAllUserQuery, useDeleteTheUserMutation } from "@/redux/api/userApi";
+import CreateService from "@/component/Services/CreateService";
+import { authKey } from "@/constants/storageKey";
+import {
+  useDeleteServiceMutation,
+  useServicesQuery,
+} from "@/redux/api/service";
 import { useDebounced } from "@/redux/hooks";
 import { getUserInfo, removeLocalStorageInfo } from "@/services/auth.service";
-import { IMeta, IUser } from "@/types";
-import { TrimToUpperCase } from "@/utils/utils";
+import { IMeta } from "@/types";
 import {
   DeleteOutlined,
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
 import { Button, Input, Popover, message } from "antd";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import {
-  useAddAdminMutation,
-  useAddAdminRoleMutation,
-  useAdminsQuery,
-} from "@/redux/api/admin";
-import RegisterForm from "@/component/Register";
-import Form from "@/component/Forms/Form";
-import FormInput from "@/component/Forms/FormInput";
-import { useRouter } from "next/navigation";
-import { authKey } from "@/constants/storageKey";
+import EditService from "@/component/Services/EditService";
+import Link from "next/link";
 
-const AdminRoleForm = ({ id }: { id: any }) => {
-  const [addAdminRole] = useAddAdminRoleMutation();
-
-  const onSubmit = async (data: { roleBasedPermission: string }) => {
-    console.log("first id ", id, data);
-    message.loading("Adding.....", 1);
-    console.log(data);
-    try {
-      await addAdminRole({ id, body: data });
-      message.success("Role Add successfully", 1);
-    } catch (err: any) {
-      message.error(err.message);
-    }
-  };
-  return (
-    <div>
-      <Form submitHandler={onSubmit}>
-        <FormInput
-          type="text"
-          name="roleBasedPermission"
-          size="large"
-          placeholder="Give Role"
-        />
-        <br />
-        <br />
-        <Button type="primary" htmlType="submit">
-          Add Role
-        </Button>
-      </Form>
-    </div>
-  );
-};
-
-export default function ManageAdminRole() {
+export default function ServicePage() {
   const { role } = getUserInfo() as any;
   const history = useRouter();
-  if (role !== "super_admin") {
+  if (role !== "admin") {
     removeLocalStorageInfo(authKey);
     history.push("/login");
   }
   const query: Record<string, any> = {};
-  const [deleteTheUser] = useDeleteTheUserMutation();
+  const [deleteService] = useDeleteServiceMutation();
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
   const [sortBy, setSortBy] = useState<string>("");
@@ -88,18 +51,18 @@ export default function ManageAdminRole() {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  const deleteAdmin = async (id: number) => {
+  const deleteTheService = async (id: number) => {
     message.loading("Deleting.....", 1);
     try {
-      await deleteTheUser({ id });
+      await deleteService({ id });
       message.success("Deleted successfully", 1);
     } catch (err: any) {
       message.error(err.message);
     }
   };
-  const { data, isLoading } = useAdminsQuery({ ...query });
+  const { data, isLoading } = useServicesQuery({ ...query });
   //@ts-ignore
-  const admin: IUser[] = data?.admins;
+  const services: IUser[] = data?.services;
   const meta: IMeta | undefined = data?.meta;
   const columns = [
     {
@@ -108,23 +71,26 @@ export default function ManageAdminRole() {
       sorter: true,
     },
     {
-      title: "Name",
-      dataIndex: "",
-
-      render: function (data: Record<string, string>) {
-        const fullName = `${data?.firstName} ${
-          data?.middleName ? data?.middleName : ""
-        } ${data?.lastName}`;
-        return <>{fullName}</>;
-      },
+      title: "Title",
+      dataIndex: "title",
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Price",
+      dataIndex: "price",
     },
     {
-      title: "Role",
-      dataIndex: "roleBasedPermission",
+      title: "Status",
+      dataIndex: "status",
+      sorter: true,
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      sorter: true,
+    },
+    {
+      title: "Rating",
+      dataIndex: "rating",
     },
     {
       title: "Created at",
@@ -135,20 +101,22 @@ export default function ManageAdminRole() {
       sorter: true,
     },
     {
-      title: "Contact no.",
-      dataIndex: "contactNo",
-    },
-    {
       title: "Action",
-      dataIndex: "id",
-
+      dataIndex: "",  
       render: function (data: any) {
         return (
           <>
-            <Popover content={<AdminRoleForm id={data} />} trigger="click">
-              <Button type="primary">Add Admin Role</Button>
-            </Popover>
-            <Button onClick={() => deleteAdmin(data)} type="primary" danger>
+            <Link href={`/admin/service/${data?.id}`}>
+              <Button type="primary">
+                <EditOutlined />
+              </Button>
+            </Link>
+
+            <Button
+              onClick={() => deleteTheService(data?.id)}
+              type="primary"
+              danger
+            >
               <DeleteOutlined />
             </Button>
           </>
@@ -182,36 +150,47 @@ export default function ManageAdminRole() {
             link: `/${role}/profile`,
           },
           {
-            label: `manage-admin-role`,
-            link: `/${role}/manage-admin-role`,
+            label: `service`,
+            link: `/${role}/service`,
           },
         ]}
       />
-      <div>
-        <Input
-          size="large"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: "20%",
-          }}
-        />
-        {(!!sortBy || !!sortOrder || !!searchTerm) && (
-          <Button
-            style={{ margin: "0px 5px" }}
-            type="primary"
-            onClick={resetFilters}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: "100%" }}>
+          <Input
+            size="large"
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: "20%",
+            }}
+          />
+          {(!!sortBy || !!sortOrder || !!searchTerm) && (
+            <Button
+              style={{ margin: "0px 5px" }}
+              type="primary"
+              onClick={resetFilters}
+            >
+              <ReloadOutlined />
+            </Button>
+          )}
+        </div>
+        <div>
+          <Popover
+            style={{ width: "60%" }}
+            content={<CreateService />}
+            trigger="click"
           >
-            <ReloadOutlined />
-          </Button>
-        )}
+            <Button type="primary">Create Service</Button>
+          </Popover>
+        </div>
       </div>
-      <h1 style={{ textAlign: "center" }}>List Of User For Make Admin </h1>
+      <h1 style={{ textAlign: "center" }}>List Of Services </h1>
       <div style={{ margin: "10px" }}>
         <TableListViewer
           loading={isLoading}
           columns={columns}
-          tableRow={admin}
+          tableRow={services}
           paginationConfig={{
             onChange: onPaginationChange,
             pageSize: size,

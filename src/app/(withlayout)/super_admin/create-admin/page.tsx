@@ -3,7 +3,7 @@ import TableListViewer from "@/component/Common/TableListViewer";
 import UMBreadCrumb from "@/component/Common/UMBreadCrumb";
 import { useAllUserQuery, useDeleteTheUserMutation } from "@/redux/api/userApi";
 import { useDebounced } from "@/redux/hooks";
-import { getUserInfo } from "@/services/auth.service";
+import { getUserInfo, removeLocalStorageInfo } from "@/services/auth.service";
 import { IMeta, IUser } from "@/types";
 import { TrimToUpperCase } from "@/utils/utils";
 import {
@@ -17,9 +17,16 @@ import React, { useState } from "react";
 import dayjs from "dayjs";
 import { useAddAdminMutation } from "@/redux/api/admin";
 import RegisterForm from "@/component/Register";
+import { useRouter } from "next/navigation";
+import { authKey } from "@/constants/storageKey";
 
 export default function CreateAdmins() {
   const { role } = getUserInfo() as any;
+  const history = useRouter()
+  if(role !== "super_admin"){
+    removeLocalStorageInfo(authKey);
+    history.push("/login");
+  }
   const query: Record<string, any> = {};
   const [addAdmin] = useAddAdminMutation();
   const [deleteTheUser] = useDeleteTheUserMutation();

@@ -15,7 +15,7 @@ const { Title, Text } = Typography;
 export default function ProfilePage() {
   const { role } = getUserInfo() as any;
   const history = useRouter();
-  if (role !== "super_admin") {
+  if (role !== "admin") {
     removeLocalStorageInfo(authKey);
     history.push("/login");
   }
@@ -41,7 +41,7 @@ export default function ProfilePage() {
         title={
           <>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h2>Super Admin Profile</h2>
+              <h2>Admin Profile</h2>
               <div style={{ textAlign: "center" }}>
                 <Popover
                   content={
@@ -49,7 +49,10 @@ export default function ProfilePage() {
                   }
                   open={openPopover}
                 >
-                  <Button onClick={() => setOpenPopover(true)} type="primary">
+                  <Button
+                    onClick={() => setOpenPopover(!openPopover)}
+                    type="primary"
+                  >
                     EDIT PROFILE DETAIL
                   </Button>
                 </Popover>
@@ -122,6 +125,10 @@ export default function ProfilePage() {
           <Col xs={24} sm={12} md={8} lg={6}>
             <Text strong>Role: </Text>
             <Text>{user?.role} </Text>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={6}>
+            <Text strong>Admin Role: </Text>
+            <Text>{user?.roleBasedPermission} </Text>
           </Col>
         </Row>
       </Card>

@@ -40,3 +40,16 @@ export type IUser = {
     updateAt: Date;
   };
   
+ export type IService = {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    price: string;
+    status: string;
+    category: string;
+    createAt: Date;
+    updateAt: Date;
+    rating?: string | null;
+  };
+  

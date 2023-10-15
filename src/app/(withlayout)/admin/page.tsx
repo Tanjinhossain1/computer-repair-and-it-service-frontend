@@ -4,12 +4,12 @@ import { getUserInfo, removeLocalStorageInfo } from '@/services/auth.service';
 import { useRouter } from 'next/navigation';
 import { authKey } from '@/constants/storageKey';
 
-export default function SuperAdminPage() {
+export default function AdminPage() {
     const { role } = getUserInfo() as any;
-    const history = useRouter()
-    if(role !== "super_admin"){ 
-        removeLocalStorageInfo(authKey);
-        history.push("/login");
+    const history = useRouter();
+    if (role !== "admin") {
+      removeLocalStorageInfo(authKey);
+      history.push("/login");
     }
   return (
     <div>

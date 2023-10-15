@@ -11,7 +11,7 @@ import Trusted from "@/component/Home/Trusted";
 import ChooseUs from "@/component/Home/ChooseUs";
 import dynamic from "next/dynamic";
 
-export  function Home() {
+function HomePage() {
   return (
     <div>
       <NavbarComponent />
@@ -31,4 +31,4 @@ export  function Home() {
     </div>
   );
 }
-export default dynamic (() => Promise.resolve(Home), {ssr: false})
+export default dynamic (() => Promise.resolve(HomePage), {ssr: false})

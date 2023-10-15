@@ -23,12 +23,10 @@ const { Header: AntHeader, Content, Footer } = Layout;
 
 export default function NavbarComponent() {
   const router = useRouter();
-
   const logOut = () => {
     removeLocalStorageInfo(authKey);
     router.push("/login");
   };
-
   const items: MenuProps["items"] = [
     {
       key: "0",
@@ -77,7 +75,7 @@ export default function NavbarComponent() {
             </Col>
           </>
         )}
-        {role === "super_admin" ? (
+        {role === "super_admin" || role === "admin" ? (
           <Col
             lg={3}
             style={{ marginRight: 10, fontWeight: 600, color: "white" }}
@@ -88,14 +86,16 @@ export default function NavbarComponent() {
           </Col>
         ) : null}
         <Col
-          lg={role === "super_admin" ? 3 : 1}
+          lg={role === "super_admin" ? 3 : 1.5}
           style={{ marginRight: 10, fontWeight: 600, color: "white" }}
         >
-          {TrimToUpperCaseWithSpace(role)}
+          {TrimToUpperCaseWithSpace(role === "user" ? "ME" : role)}
         </Col>
-        <Dropdown menu={{ items }}>
-          <Avatar size="large" icon={<UserOutlined />} />
-        </Dropdown>
+        {role ? (
+          <Dropdown menu={{ items }}>
+            <Avatar size="large" icon={<UserOutlined />} />
+          </Dropdown>
+        ) : null}
       </Row>
     </AntHeader>
   );

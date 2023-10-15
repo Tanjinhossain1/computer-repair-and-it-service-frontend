@@ -32,7 +32,7 @@ interface ImageUploadPropsType {
 const UploadImageField = ({name,runAfterChange}: ImageUploadPropsType) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-  const {setValue} = useFormContext()
+  const {setValue,reset} = useFormContext()
 
   const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === 'uploading') {
@@ -48,7 +48,7 @@ const UploadImageField = ({name,runAfterChange}: ImageUploadPropsType) => {
       getBase64(info.file.originFileObj as RcFile, (url) => {
         setLoading(false);
         setImageUrl(url);
-      });
+      }); 
     }
   };
 
