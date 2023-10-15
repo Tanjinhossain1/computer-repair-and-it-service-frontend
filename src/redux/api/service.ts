@@ -67,6 +67,12 @@ export const serviceApi = baseApi.injectEndpoints({
           params:arg
         };
       }, 
+      transformResponse: (response: IService[], meta: IMeta) => {
+        return {
+          services: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.service],
     }),
     upComingService: build.query({
@@ -77,6 +83,12 @@ export const serviceApi = baseApi.injectEndpoints({
           params:arg 
         };
       }, 
+      transformResponse: (response: IService[], meta: IMeta) => {
+        return {
+          services: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.service],
     }),
   }),

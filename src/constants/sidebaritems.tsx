@@ -51,10 +51,6 @@ export const sidebarItems = (role: string) => {
         {
           label: <Link href={`/${role}/booked-services`}>Booked Services</Link>,
           key: `/${role}/booked-services`,
-        },
-        {
-          label: <Link href={`/${role}/update-booked-services`}>Update Booked Services</Link>,
-          key: `/${role}/update-booked-services`,
         }, 
       ],
     },

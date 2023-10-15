@@ -105,28 +105,23 @@ export default function RegisterForm({
         )}
 
         <Row gutter={[16, 16]}>
-          <Col span={12}>
+          <Col lg={12}>
             <FormInput
               name="firstName"
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="First Name"
             />
           </Col>
-          <Col span={12}>
+          <Col lg={12}>
             <FormInput name="middleName" placeholder="Middle Name" />
           </Col>
-          <Col span={12}>
+          <Col lg={12}>
             <FormInput name="lastName" placeholder="Last Name" />
           </Col>
-          <Col span={12}>
-            <FormDatePicker name="dateOfBirth" />
-            {/* <DatePicker
-          onChange={(e)=>setDateOfBirth(`${e?.get('months')}-${e?.get('days')}-${e?.get('years')}`)}
-            name="dateOfBirth"
-            style={{ width: '100%' }}
-          /> */}
+          <Col lg={12}>
+            <FormDatePicker name="dateOfBirth" /> 
           </Col>
-          <Col span={16}>
+          <Col lg={16}>
             <Radio.Group
               name="gender"
               onChange={(e) => setGender(e.target.value)}
@@ -138,14 +133,14 @@ export default function RegisterForm({
               <Radio value="Other">Other</Radio>
             </Radio.Group>
           </Col>
-          <Col span={24}>
+          <Col lg={24}>
             <FormInput
               name="email"
               prefix={<MailOutlined className="site-form-item-icon" />}
               placeholder="Email"
             />
           </Col>
-          <Col span={24}>
+          <Col lg={24}>
             <FormInput
               name="password"
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -153,7 +148,7 @@ export default function RegisterForm({
               placeholder="Password"
             />
           </Col>
-          <Col span={24}>
+          <Col lg={24}>
             <FormInput
               name="contactNo"
               prefix={<PhoneOutlined className="site-form-item-icon" />}

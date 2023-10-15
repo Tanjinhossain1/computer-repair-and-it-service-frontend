@@ -18,7 +18,7 @@ export type ResponseErrorType = {
 export interface IGenericErrorMessages {
     path: string | number;
     message: string
-} 
+}
 export type IUser = {
     id: number;
     password: string;
@@ -38,9 +38,9 @@ export type IUser = {
     profileImage?: string | null;
     createAt: Date;
     updateAt: Date;
-  };
-  
- export type IService = {
+};
+
+export type IService = {
     id: number;
     title: string;
     description: string;
@@ -51,5 +51,27 @@ export type IUser = {
     createAt: Date;
     updateAt: Date;
     rating?: string | null;
-  };
-  
+};
+export type IBooked = {
+    id: number;
+    serviceId: number;
+    userId: number;
+    startDate: string;
+    endDate: string;
+    bookStatus: string
+    service: IService
+}
+
+export type IBlogPost = {
+    id: number;
+   title: string;
+   description:string;
+   image:string;
+   topShortDescription:string
+}
+export type IFaqs = {
+    id: string
+   question: string;
+   ans:string
+}
+
