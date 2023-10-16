@@ -48,7 +48,7 @@ const UploadImageField = ({name,runAfterChange}: ImageUploadPropsType) => {
       getBase64(info.file.originFileObj as RcFile, (url) => {
         setLoading(false);
         setImageUrl(url);
-      }); 
+      });  
     }
   };
 

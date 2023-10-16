@@ -147,7 +147,7 @@ export default function ServiceManagement() {
                 content={<EditServiceComponent peram={data} showOnlyStatus />}
                 trigger="click"
               >
-                <Button style={{marginLeft:"10px"}} type="primary">Available</Button>
+                <Button style={{marginLeft:"10px"}} type="primary">Status</Button>
               </Popover> : null
             } 
               <Popover

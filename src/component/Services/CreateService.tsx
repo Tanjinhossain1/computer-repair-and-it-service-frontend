@@ -58,7 +58,7 @@ export default function CreateService() {
     }, 500);
   };
   return (
-    <Form resolver={yupResolver(serviceSchema)} submitHandler={onSubmit}>
+    <Form isReset resolver={yupResolver(serviceSchema)} submitHandler={onSubmit}>
       <Row gutter={16}>
         <Col xs={24} sm={6}>
           <FormInput label="Title" name="title" />

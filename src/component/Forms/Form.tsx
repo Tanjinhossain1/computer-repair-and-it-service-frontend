@@ -12,6 +12,7 @@ type FormProps = {
   children?: ReactElement | ReactNode;
   submitHandler: SubmitHandler<any>;
   style?: any;
+  isReset?: boolean;
 } & FormConfig;
 
 const Form = ({
@@ -20,6 +21,7 @@ const Form = ({
   defaultValues,
   resolver,
   style,
+  isReset,
 }: FormProps) => {
   const formConfig: FormConfig = {};
 
@@ -33,7 +35,9 @@ const Form = ({
   const onSubmit = (data: any) => {
     console.log(data);
     submitHandler(data);
-    // reset();
+    if(isReset){
+      reset();
+    }
   };
 
   useEffect(() => {

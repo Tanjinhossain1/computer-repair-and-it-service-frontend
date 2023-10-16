@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import ProfilePage from './profile/page'
 import { getUserInfo, removeLocalStorageInfo } from '@/services/auth.service';
@@ -12,7 +13,7 @@ export default function AdminPage() {
       history.push("/login");
     }
   return (
-    <div>
+    <div> 
         <ProfilePage />
     </div>
   )

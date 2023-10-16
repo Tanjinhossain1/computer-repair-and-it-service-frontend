@@ -51,7 +51,7 @@ export default function BlogPost() {
           <div style={{margin:'30px'}}>
             <Row gutter={50}>
                 {
-                    data?.blogPosts.map((blogPost:IBlogPost)=>{
+                    data?.blogPosts?.map((blogPost:IBlogPost)=>{
                         return (
                             <Col key={blogPost.id} sm={6}>
                             <Link href={`/admin/blog-post/${blogPost.id}`}>

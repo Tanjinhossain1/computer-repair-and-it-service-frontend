@@ -68,9 +68,15 @@ export default function BookedServices() {
   const meta: IMeta | undefined = data?.meta;
   const columns = [
     {
-      title: "Id",
-      dataIndex: "id",
+      title: "User Name",
+      dataIndex: "user",
       sorter: true,
+      render: function (data: any) {
+        const fullName = `${data?.firstName} ${
+          data?.middleName ? data?.middleName : ""
+        } ${data?.lastName}`;
+        return <>{fullName}</>;
+      },
     },
     {
       title: "Title",
@@ -112,32 +118,57 @@ export default function BookedServices() {
       render: function (data: any) {
         return (
           <>
-            <Button
-              onClick={() => UpdateBook(data?.id, { bookStatus: "reject" })}
-              type="primary"
-              danger
-            >
-              Reject
-            </Button>
+            {data?.bookStatus === "done" ? (
+              <h3 style={{marginRight:"10px",display:"inline"}}>Service Will Completed</h3>
+            ) : (
+              <>
+                <Button
+                  onClick={() => UpdateBook(data?.id, { bookStatus: "reject" })}
+                  type="primary"
+                  danger
+                  style={{ marginRight: "10px" }}
+                >
+                  Reject
+                </Button>
+                {data?.bookStatus === "accept" ? (
+                  <Button
+                    style={{ marginRight: "10px", backgroundColor: "#15d600" }}
+                    onClick={() => UpdateBook(data?.id, { bookStatus: "done" })}
+                    type="primary"
+                  >
+                    Done
+                  </Button>
+                ) : (
+                  data?.bookStatus !== "done" && (
+                    <Button
+                      style={{ marginRight: "10px" }}
+                      onClick={() =>
+                        UpdateBook(data?.id, { bookStatus: "accept" })
+                      }
+                      type="primary"
+                    >
+                      Accept
+                    </Button>
+                  )
+                )}
 
-            <Button
-              style={{ marginLeft: "10px", marginRight: "10px" }}
-              onClick={() => UpdateBook(data?.id, { bookStatus: "accept" })}
-              type="primary"
-            >
-              Accept
-            </Button>
-
-            <Popover
-              key={data?.id}
-              trigger={"click"}
-              content={<UpdateScheduleForm updateData={data} />}
-            >
-              <Button htmlType="submit" type="primary">Change Schedule</Button>
-            </Popover>
-
-            <Button
-            style={{marginLeft:"10px"}}
+                <Popover
+                  key={data?.id}
+                  trigger={"click"}
+                  content={<UpdateScheduleForm updateData={data} />}
+                >
+                  <Button
+                    style={{ marginRight: "10px" }}
+                    htmlType="submit"
+                    type="primary"
+                  >
+                    Change Schedule
+                  </Button>
+                </Popover> 
+              </>
+            )}
+              <Button
+              style={{ marginRight: "10px" }}
               onClick={() => deleteBooked(data?.id)}
               type="primary"
               danger

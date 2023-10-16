@@ -1,14 +1,38 @@
 "use client";
-import { useBlogPostQuery } from "@/redux/api/blogPost";
-import { Spin } from "antd";
+import { authKey } from "@/constants/storageKey";
+import { useBlogPostQuery, useDeleteBlogPostMutation } from "@/redux/api/blogPost";
+import { getUserInfo, removeLocalStorageInfo } from "@/services/auth.service";
+import { DeleteOutlined } from "@ant-design/icons";
+import { Button, Spin, message } from "antd";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function ViewBlogPost() {
+  const { role } = getUserInfo() as any;
+  const history = useRouter();
+  if (role !== "admin") {
+    removeLocalStorageInfo(authKey);
+    history.push("/login");
+  }
+  const [deleteBlogPost] = useDeleteBlogPostMutation();
+
   const { id } = useParams();
-  const { data, isLoading } = useBlogPostQuery({ id });
-  console.log("dataad ef  ", data);
+  const { data, isLoading } = useBlogPostQuery({ id }); 
+  
+  const deleteTheBlogPost = async () => {
+    message.loading("Deleting.....", 1);
+    try {
+      //   console.log(data);
+      await deleteBlogPost({ id });
+      message.success("Deleted successfully", 1);
+      history.push('/admin/blog-post')
+    } catch (err: any) {
+      //   console.error(err.message);
+      message.error(err.message);
+    }
+  };
   return (
     <div>
       {isLoading ? (
@@ -17,8 +41,9 @@ export default function ViewBlogPost() {
         </Spin>
       ) : (
         <div>
-          <div style={{ width: "80%", margin: "auto", textAlign: "left" }}>
+          <div style={{ width: "80%", margin: "auto", textAlign: "left",display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:"20px" }}>
             <h1>{data.title}</h1>
+            <Button onClick={deleteTheBlogPost} danger type="primary"><DeleteOutlined ></DeleteOutlined></Button>
           </div>
           <br />
           <br />
