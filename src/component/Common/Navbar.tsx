@@ -54,7 +54,20 @@ export default function NavbarComponent() {
             Home
           </Link>
         </Col>
-        {role ? null : (
+
+        {
+          role && role === "user" ? 
+        <Col
+        lg={1}
+        style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+        >
+          <Link style={{ color: "white" }} href="/user-profile">
+            Profile
+          </Link>
+        </Col>
+          : null
+        }
+        { role ? null : (
           <>
             <Col
               lg={1}

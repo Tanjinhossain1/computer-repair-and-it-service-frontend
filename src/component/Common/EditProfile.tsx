@@ -45,6 +45,7 @@ export const bloodGroupOptions = [
 export default function EditProfile({ data , setOpenPopover}: { data: any,setOpenPopover:any }) {
   const [unFormatFile, setUnFormatFile] = useState<any>(null);
   const [profileImage, setProfileImage] = useState<string | null>(data?.profileImage ? data?.profileImage : "");
+  const [imageLoad,setImageLoad] = useState<boolean>(false)
   const [updateProfile] = useUpdateProfileMutation();
     console.log('first  ', data)
   useEffect(()=>{
@@ -61,11 +62,13 @@ export default function EditProfile({ data , setOpenPopover}: { data: any,setOpe
               .then((res) => res.json())
               .then((fileRepsData) => {
                 if (fileRepsData?.url) {
+                  setImageLoad(false)
                   setProfileImage(fileRepsData?.url);
                 }
                 console.log("image fileRepsData  ", fileRepsData);
               })
               .catch((err) => {
+                setImageLoad(false)
                 console.log(err);
               }); 
     }
@@ -164,7 +167,10 @@ export default function EditProfile({ data , setOpenPopover}: { data: any,setOpe
                 />
               </Col>
               <Col xs={24} sm={12} md={8} lg={6}>
-                <UploadImageField runAfterChange={(file)=>setUnFormatFile(file)} name="profileImage" />
+                <UploadImageField runAfterChange={(file)=>{
+                  setImageLoad(true)
+                  setUnFormatFile(file)
+                }} name="profileImage" />
               </Col>
             </Row>
             <Row justify="center">
@@ -173,6 +179,7 @@ export default function EditProfile({ data , setOpenPopover}: { data: any,setOpe
                   style={{ marginTop: "20px" }}
                   type="primary"
                   htmlType="submit"
+                  disabled={imageLoad}
                 >
                   Save Profile Details
                 </Button>

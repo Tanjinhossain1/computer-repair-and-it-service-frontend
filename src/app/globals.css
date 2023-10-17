@@ -7,3 +7,15 @@
   font-family: 'Roboto Condensed', sans-serif;
 }
 
+
+@keyframes borderAnimation {
+  0% {
+    border-image-source: linear-gradient(45deg, #f06, #9f6);
+  }
+  50% {
+    border-image-source: linear-gradient(45deg, #9f6, #f06);
+  }
+  100% {
+    border-image-source: linear-gradient(45deg, #f06, #9f6);
+  }
+} 

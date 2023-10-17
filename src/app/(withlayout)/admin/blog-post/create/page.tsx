@@ -40,10 +40,10 @@ export default function CreateBlogPost() {
         }); 
     }
   }, [unFormatFile]);
-
+  
   const onSubmit = async (data: any) => {
     console.log("blog ", data);
-
+    
     setTimeout(async () => {
       message.loading("Creating.....", 1);
       try {

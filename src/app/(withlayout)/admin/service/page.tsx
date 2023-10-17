@@ -19,7 +19,6 @@ import { Button, Input, Popover, message } from "antd";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import EditService from "@/component/Services/EditService";
 import Link from "next/link";
 
 export default function ServicePage() {
@@ -81,6 +80,11 @@ export default function ServicePage() {
     {
       title: "Status",
       dataIndex: "status",
+      sorter: true,
+    },
+    {
+      title: "Location",
+      dataIndex: "serviceLocation",
       sorter: true,
     },
     {

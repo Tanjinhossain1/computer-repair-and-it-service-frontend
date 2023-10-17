@@ -14,6 +14,7 @@ export default function CreateService() {
   const [unFormatFile, setUnFormatFile] = useState<any>(null);
   const [image, setImage] = useState<string | null>("");
   const [createService] = useCreateServiceMutation();
+  const [imageLoad, setImageLoad] = useState<boolean>(false);
   useEffect(() => {
     if (unFormatFile) {
       const fileData = new FormData();
@@ -28,11 +29,13 @@ export default function CreateService() {
         .then((res) => res.json())
         .then((fileRepsData) => {
           if (fileRepsData?.url) {
+            setImageLoad(false);
             setImage(fileRepsData?.url);
           }
           console.log("image fileRepsData  ", fileRepsData);
         })
         .catch((err) => {
+          setImageLoad(false);
           console.log(err);
         });
     }
@@ -58,7 +61,11 @@ export default function CreateService() {
     }, 500);
   };
   return (
-    <Form isReset resolver={yupResolver(serviceSchema)} submitHandler={onSubmit}>
+    <Form
+      isReset
+      resolver={yupResolver(serviceSchema)}
+      submitHandler={onSubmit}
+    >
       <Row gutter={16}>
         <Col xs={24} sm={6}>
           <FormInput label="Title" name="title" />
@@ -67,13 +74,19 @@ export default function CreateService() {
           <FormInput type="number" label="Price" name="price" />
         </Col>
         <Col xs={24} sm={6}>
-        <FormSelectField
+          <FormSelectField
             size="large"
             name="status"
-            options={[{ label: "available", value: "available" },{label:"up-coming",value:"up-coming"}]}
+            options={[
+              { label: "available", value: "available" },
+              { label: "up-coming", value: "up-coming" },
+            ]}
             label="Status"
-            placeholder="Select" 
-          /> 
+            placeholder="Select"
+          />
+        </Col>
+        <Col xs={24} sm={6}>
+          <FormInput label="Location" name="serviceLocation" />
         </Col>
         <Col xs={24} sm={6}>
           <FormInput label="Category" name="category" />
@@ -86,13 +99,16 @@ export default function CreateService() {
         </Col>
         <Col xs={24} sm={6}>
           <UploadImageField
-            runAfterChange={(file) => setUnFormatFile(file)}
+            runAfterChange={(file) => {
+              setImageLoad(true);
+              setUnFormatFile(file);
+            }}
             name="image"
           />
         </Col>
       </Row>
       <div style={{ textAlign: "end" }}>
-        <Button type="primary" htmlType="submit">
+        <Button disabled={imageLoad} type="primary" htmlType="submit">
           Create Service
         </Button>
       </div>

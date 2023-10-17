@@ -27,10 +27,10 @@ export default function LoginForm() {
         if(res?.accessToken){
           router.push('/')
           message.success("User Login Success",1)
+          storeUserInfo({accessToken: res?.accessToken })
         }
         console.log('res', res)
   
-        storeUserInfo({accessToken: res?.accessToken })
       } catch (err: any) {
         console.log('error', err.message)
         message.error("login")
