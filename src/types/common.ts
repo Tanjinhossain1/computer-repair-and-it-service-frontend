@@ -51,6 +51,7 @@ export type IService = {
     createAt: Date;
     updateAt: Date;
     rating?: string | null;
+    serviceLocation?: string;
 };
 export type IBooked = {
     id: number;

@@ -37,10 +37,17 @@ export const bookedApi = baseApi.injectEndpoints({
           return {
             url: `/${BOOKED_URL}/${data.userId}`,
             method: "GET", 
+            params: data.arg,
           };
         }, 
+        transformResponse: (response: IService[], meta: IMeta) => {
+          return {
+            bookedServices: response,
+            meta,
+          };
+        },
         providesTags: [tagTypes.booking],
-      }),
+      }), 
       
       createBooking: build.mutation({
         query: (data) =>({
@@ -58,8 +65,35 @@ export const bookedApi = baseApi.injectEndpoints({
         }),  
         invalidatesTags: [tagTypes.booking]
       }), 
+      haveBookedService: build.query({
+        query: (data) => {
+          return {
+            url: `/${BOOKED_URL}/${data.userId}/${data.serviceId}`,
+            method: "GET", 
+          };
+        }, 
+        providesTags: [tagTypes.booking],
+      }),
+
+      createReview: build.mutation({
+        query: (data) =>({
+          url: `/${BOOKED_URL}/review`,
+          method: "POST", 
+          data: data.body,
+        }),  
+        invalidatesTags: [tagTypes.review]
+      }),
+      reviews: build.query({
+        query: () => {
+          return {
+            url: `/${BOOKED_URL}/review`,
+            method: "GET", 
+          };
+        }, 
+        providesTags: [tagTypes.review],
+      }),
   }),
   
 })
 
-export const { useUpdateBookingMutation,useBookedServicesQuery,useBookedServiceQuery,useCreateBookingMutation,useDeleteBookedServiceMutation } = bookedApi
+export const { useUpdateBookingMutation,useBookedServicesQuery,useBookedServiceQuery,useCreateBookingMutation,useDeleteBookedServiceMutation,useHaveBookedServiceQuery,useCreateReviewMutation,useReviewsQuery } = bookedApi

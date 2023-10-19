@@ -8,9 +8,9 @@ export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 
-interface IDebouncedType { searchQuery: string, delay: number }
+interface IDebouncedType { searchQuery: string | number, delay: number }
 export const useDebounced = ({ searchQuery, delay }: IDebouncedType) => {
-    const [debouncedValue, setDebouncedValue] = useState<string>(searchQuery);
+    const [debouncedValue, setDebouncedValue] = useState<string | number>(searchQuery);
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedValue(searchQuery)

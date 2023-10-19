@@ -86,8 +86,23 @@ export const sidebarItems = (role: string) => {
     
   ]; 
 
+  const userSideBar: MenuProps["items"] = [
+    ...defaultSidebarItems, 
+    {
+      label: <Link href={`/${role}/booking-history`}>Booking History</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/booking-history`,
+    }, 
+    {
+      label: <Link href={`/${role}/feedback`}>Feed Back Form</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/feedback`,
+    }, 
+  ]; 
+
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;
   else if (role === USER_ROLE.ADMIN) return adminSidebarItems;
+  else if (role === USER_ROLE.USER) return userSideBar;
   else {
     return defaultSidebarItems;
   }
