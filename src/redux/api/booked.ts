@@ -84,9 +84,9 @@ export const bookedApi = baseApi.injectEndpoints({
         invalidatesTags: [tagTypes.review]
       }),
       reviews: build.query({
-        query: () => {
+        query: (data) => {
           return {
-            url: `/${BOOKED_URL}/review`,
+            url: `/${BOOKED_URL}/review/${data.id}`,
             method: "GET", 
           };
         }, 

@@ -102,15 +102,7 @@ export default function BookedServices() {
       render: function (data: any) {
         return data && dayjs(data).format("MMM D, YYYY hh:mm A");
       },
-    },
-    {
-      title: "Created at",
-      dataIndex: "createAt",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
-      sorter: true,
-    },
+    }, 
     {
       title: "Action",
       dataIndex: "",

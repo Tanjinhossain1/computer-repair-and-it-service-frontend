@@ -31,7 +31,7 @@ export default function UserProfileComponent() {
         title={
           <>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h2>Admin Profile</h2>
+              <h2>My Profile</h2>
               <div style={{ textAlign: "center" }}>
                 <Popover
                   content={

@@ -68,7 +68,7 @@ export default function NavbarComponent() {
         </Col>
 
         <Col
-        lg={1}
+        lg={1.4}
         style={{ marginRight: 10, fontWeight: 600, color: "white" }}
         >
           <Link style={{ color: "white" }} href="/add-to-cart">
@@ -80,7 +80,7 @@ export default function NavbarComponent() {
         lg={1.5}
         style={{ marginRight: 10, fontWeight: 600, color: "white" }}
         >
-          <Link style={{ color: "white" }} href={`${role}/profile`}>
+          <Link style={{ color: "white" }} href={`/${role}/profile`}>
             Dashboard
           </Link> 
         </Col></>

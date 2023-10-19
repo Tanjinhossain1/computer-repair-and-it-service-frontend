@@ -12,7 +12,7 @@ import React from "react";
 export default function ViewBlogPost() {
   const { role } = getUserInfo() as any;
   const history = useRouter();
-  if (role !== "user" || role !== "admin" || role !== "super_admin") {
+  if (role !== "user") {
     removeLocalStorageInfo(authKey);
     history.push("/login");
   } 

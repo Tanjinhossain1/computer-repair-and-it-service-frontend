@@ -34,7 +34,7 @@ function Booked() {
   }, 1000);
   const { id } = useParams();
   const { data, isLoading } = useServiceQuery({ id });
-  const { data: reviews, isLoading: isLoading2 } = useReviewsQuery(null);
+  const { data: reviews, isLoading: isLoading2 } = useReviewsQuery({id: id});
 
   const { data: isAlreadyBooked, isLoading: isLoading1 } =
     useHaveBookedServiceQuery({ userId: userId, serviceId: id });
@@ -222,12 +222,15 @@ function Booked() {
                 {data?.serviceLocation}
               </div>
               <div>
-                <Button
+                {
+                  isAlreadyBooked?.id ? 
+                  <Button
                   onClick={() => setOpenReviewField(!openReviewField)}
                   type="primary"
-                >
+                  >
                   Add Review
-                </Button>
+                </Button> : null
+                }
               </div>
             </div>
             <b>Description: </b> <Card.Meta description={data?.description} />
