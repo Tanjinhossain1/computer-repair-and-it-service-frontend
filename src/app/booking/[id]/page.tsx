@@ -27,7 +27,7 @@ function Booked() {
   const { role, userId } = getUserInfo() as any;
   const history = useRouter();
   setTimeout(() => {
-    if (role !== "user") {
+    if (role !== "user" ) {
       removeLocalStorageInfo(authKey);
       history.push("/login");
     }

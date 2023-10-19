@@ -48,15 +48,16 @@ export default function UpComingServices() {
   console.log("daata ", data);
   return (
     <div
-      style={{
-        padding: "10px",
-        width: "80%",
-        margin: "auto",
-        border: "3px solid #d6d6d6",
-        borderRadius: 5,
-        marginTop: "5px",
-        boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
-      }}
+    style={{
+      padding: "10px",
+      width: "80%",
+      margin: "auto",
+      border: "3px solid #d6d6d6",
+      borderRadius: 5,
+      marginTop: "5px",
+      boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
+      backgroundColor: "white",
+    }}
     >
       {isLoading ? (
         <Spinner />

@@ -1,32 +1,43 @@
-import React from "react"; 
-import { Carousel } from "antd";
+import React from "react";
+import { Avatar, Card, Carousel } from "antd";
+import { useAllFeedBackQuery } from "@/redux/api/feedBackApi";
+import Spinner from "../Common/Spinner";
+import { IFeedback } from "@/types";
+import Meta from "antd/es/card/Meta"; 
+import Title from "antd/es/typography/Title";
+import Paragraph from "antd/es/typography/Paragraph";
 
 const contentStyle: React.CSSProperties = {
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#101242',
-  };
+  height: "300px",
+  color: "#fff",
+  lineHeight: "300px",
+  textAlign: "center",
+  background: "#101242",
+};
 
 export default function Review() {
-   
-  return (
-    <div style={{width: "50%", margin: 'auto',marginTop: "10px"}}>
-        <h1 style={{textAlign: "center"}}>Client Review</h1>
-        <Carousel autoplay dotPosition={'right'}  >
-        <div>
-          <h3 style={contentStyle}>1</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
+  const { data, isLoading } = useAllFeedBackQuery({});
+  return isLoading ? (
+    <Spinner />
+  ) : (
+    <div style={{ width: "50%", margin: "auto", marginTop: "10px" }}>
+      <h1 style={{ textAlign: "center",marginBottom:"30px"}}>Client Review</h1>
+      <Carousel autoplay dots={false} autoplaySpeed={2000} effect="fade">
+       
+        {
+          data?.feedback ? data?.feedback[0] ? 
+            data?.feedback?.map((feedBack: IFeedback)=>{
+              return <Card  hoverable key={feedBack.id}> 
+              <Meta
+                avatar={<Avatar src={feedBack.user.profileImage} />}
+                title={<Title level={4}>{feedBack.user.firstName}</Title>}
+                description={<Paragraph>{feedBack.comment}</Paragraph>}
+              /> 
+              </Card>
+            })
+          : null : null
+        } 
+       
       </Carousel>
     </div>
   );

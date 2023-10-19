@@ -57,7 +57,8 @@ export default function NavbarComponent() {
 
         {
           role && role === "user" ? 
-        <><Col
+        <>
+        <Col
         lg={1}
         style={{ marginRight: 10, fontWeight: 600, color: "white" }}
         >
@@ -65,6 +66,16 @@ export default function NavbarComponent() {
             Profile
           </Link> 
         </Col>
+
+        <Col
+        lg={1}
+        style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+        >
+          <Link style={{ color: "white" }} href="/add-to-cart">
+            AddToCart
+          </Link> 
+        </Col>
+
         <Col
         lg={1.5}
         style={{ marginRight: 10, fontWeight: 600, color: "white" }}

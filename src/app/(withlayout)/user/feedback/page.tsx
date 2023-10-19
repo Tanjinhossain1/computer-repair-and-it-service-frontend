@@ -12,7 +12,7 @@ export default function FeedbackPage() {
   const { role,userId } = getUserInfo() as any;
   const history = useRouter();
   setTimeout(() => {
-    if (role !== "user") {
+    if (role !== "user" || role !== "admin" || role !== "super_admin") {
       removeLocalStorageInfo(authKey);
       history.push("/login");
     }

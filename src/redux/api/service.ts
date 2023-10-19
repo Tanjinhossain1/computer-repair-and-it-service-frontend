@@ -1,4 +1,4 @@
-import { IMeta, IService, IUser } from "@/types";
+import { IAddToCart, IMeta, IService, IUser } from "@/types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi"
 
@@ -91,8 +91,33 @@ export const serviceApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.service],
     }),
+    getAllAddToCart: build.query({
+      query: (data) => {
+        return {
+          url: `/${SERVICE_URL}/add-to-cart/${data.id}`,
+          method: "GET",  
+        };
+      }, 
+      transformResponse: (response: IAddToCart[], meta: IMeta) => {
+        return {
+          addToCart: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.addToCart],
+    }),
+    createAddToCart: build.mutation({
+      query: (data) => {
+        return {
+          url: `/${SERVICE_URL}/add-to-cart`,
+          method: "POST",
+          data:data.body 
+        };
+      },  
+      invalidatesTags: [tagTypes.addToCart],
+    }),
   }),
   
 })
 
-export const { useUpdateServiceMutation,useServicesQuery,useServiceQuery,useCreateServiceMutation,useDeleteServiceMutation, useAvailableServiceQuery,useUpComingServiceQuery } = serviceApi
+export const { useUpdateServiceMutation,useServicesQuery,useServiceQuery,useCreateServiceMutation,useDeleteServiceMutation, useAvailableServiceQuery,useUpComingServiceQuery,useGetAllAddToCartQuery,useCreateAddToCartMutation } = serviceApi

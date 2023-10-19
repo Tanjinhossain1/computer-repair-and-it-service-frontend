@@ -53,8 +53,8 @@ export default function CreateBlogPost() {
         };
         //   console.log(data);
         await createBlogPost({ body });
-        message.success("Create successfully", 1);
         history.push("/admin/blog-post");
+        message.success("Create successfully", 1);
       } catch (err: any) {
         //   console.error(err.message);
         message.error(err.message);

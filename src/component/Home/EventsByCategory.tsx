@@ -21,7 +21,9 @@ export default function EventsByCategory() {
   }
 
   const { data, isLoading } = useServicesQuery({ ...query });
-  const { data:data1, isLoading: isLoading1 } = useServicesQuery({}); 
+  const { data: data1, isLoading: isLoading1 } = useServicesQuery({});
+  const uniqueCategories = [];
+  const seenCategories = new Set();
   return (
     <div
       style={{
@@ -32,6 +34,7 @@ export default function EventsByCategory() {
         borderRadius: 5,
         marginTop: "5px",
         boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
+        backgroundColor: "white",
       }}
     >
       <h1 style={{ textAlign: "center", marginBottom: "10px" }}>
@@ -40,17 +43,19 @@ export default function EventsByCategory() {
       <Row gutter={50}>
         {data1?.services && data1?.services[0]
           ? data1?.services.map((service: IService) => {
-              return (
-                <Col key={service?.id}>
-                  <Button
-                    onClick={() => {
-                      setSearchTerm(service.category);
-                    }}
-                  >
-                    {service.category}
-                  </Button>
-                </Col>
-              );
+              const category = service.category;
+              if (!seenCategories.has(category)) {
+                seenCategories.add(category);
+                uniqueCategories.push(category);
+                return (
+                  <Col key={category}>
+                    <Button onClick={() => setSearchTerm(category)}>
+                      {category}
+                    </Button>
+                  </Col>
+                );
+              }
+              return null;
             })
           : null}
       </Row>
@@ -78,8 +83,8 @@ export default function EventsByCategory() {
                           />
                         }
                       >
-                        <Button type="primary" style={{ width: "100%" }}>
-                          Book
+                        <Button disabled={service.status === "up-coming"} type="primary" style={{ width: "100%" }}>
+                           {service.status === "up-coming" ? "Up Coming " : "Book"}
                         </Button>
                       </Card>
                     </Col>

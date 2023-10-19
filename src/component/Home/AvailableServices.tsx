@@ -1,5 +1,9 @@
-import { useAvailableServiceQuery, useServicesQuery } from "@/redux/api/service";
-import { Button, Card, Col, Input, InputNumber, Row } from "antd";
+import {
+  useAvailableServiceQuery,
+  useCreateAddToCartMutation,
+  useServicesQuery,
+} from "@/redux/api/service";
+import { Button, Card, Col, Input, InputNumber, Row, message } from "antd";
 import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
 import Spinner from "../Common/Spinner";
@@ -8,8 +12,11 @@ import Image from "next/image";
 import { useDebounced } from "@/redux/hooks";
 import { SearchOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { getUserInfo } from "@/services/auth.service";
 
 export default function AvailableServices() {
+  const { userId } = getUserInfo() as any;
+
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number>(0);
@@ -47,11 +54,31 @@ export default function AvailableServices() {
   );
   const { data, isLoading } = useAvailableServiceQuery({ ...query });
   console.log("daata ", data);
+  const [createAddToCart] = useCreateAddToCartMutation();
+  const addTOCart = async (serviceId: number) => {
+    message.loading("addToCart.....", 1);
+    try {
+      //   console.log(data);
+      const res: any = await createAddToCart({
+        body: {
+          userId: userId,
+          serviceId: serviceId,
+        },
+      });
+      if (res?.data) {
+        console.log("res   ", res);
+        message.success("AddToCart successfully", 1);
+      }
+    } catch (err: any) {
+      //   console.error(err.message);
+      message.error(err.message);
+    }
+  };
   return (
     <div
       style={{
         padding: "10px",
-        width: "80%",
+        width: "90%",
         margin: "auto",
         border: "3px solid #d6d6d6",
         borderRadius: 5,
@@ -115,31 +142,44 @@ export default function AvailableServices() {
             <br />
             <br />
           </div>
-          <Row gutter={100}>
+          <Row gutter={50}>
             {data?.services && data?.services[0] ? (
               data?.services?.map((service: IService) => {
                 return (
-                  <Col key={service.id} lg={6}>
+                  <Col key={service.id} xl={6}>
                     <Card
-                    hoverable
+                      hoverable
                       style={{ width: 300 }}
-                      cover={<Image width={150} height={150} alt={service.title} src={service.image} />}
+                      cover={
+                        <Image
+                          width={150}
+                          height={150}
+                          alt={service.title}
+                          src={service.image}
+                        />
+                      }
                       actions={[
                         <Button key={service.id} type="primary">
-                       <Link style={{color:"white"}} href={`/booking/${service.id}`}>
-                          Book Now
-                        </Link>
-                        </Button>
-                        ,
-                        <Button key={service.id} type="default">
+                          <Link
+                            style={{ color: "white" }}
+                            href={`/booking/${service.id}`}
+                          >
+                            Book Now
+                          </Link>
+                        </Button>,
+                        <Button
+                          onClick={() => addTOCart(service.id)}
+                          key={service.id}
+                          type="default"
+                        >
                           Add to Cart
                         </Button>,
                       ]}
                     >
                       <Card.Meta
                         title={service.title}
-                        description={service.description}
-                      />
+                        description={service.description.slice(0,120)}
+                      />......
                       <div>
                         <strong>Category: </strong>
                         {service.category}

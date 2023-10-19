@@ -11,11 +11,13 @@ import Trusted from "@/component/Home/Trusted";
 import ChooseUs from "@/component/Home/ChooseUs";
 import dynamic from "next/dynamic";
 import OverViewSection from "@/component/Home/Overview";
+import BlogPostSection from "@/component/Home/BlogPostSection";
 
 function HomePage() {
   return (
     <div>
       <NavbarComponent />
+      <div style={{backgroundColor:"#e8e8e8"}}>
       <div>
         <HeaderComponent />
       </div>
@@ -28,8 +30,10 @@ function HomePage() {
       <Review />
       <LatestNews />
       <Trusted />
+      <BlogPostSection />
       <ChooseUs />
       <FooterComponent />
+      </div>
     </div>
   );
 }

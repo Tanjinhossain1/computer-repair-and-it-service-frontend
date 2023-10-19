@@ -15,7 +15,7 @@ import dayjs from 'dayjs'
 export default function BookingHistoryPage() {
   const { role,userId } = getUserInfo() as any;
   const history = useRouter();
-  if (role !== "user") {
+  if (role !== "user" || role !== "admin" || role !== "super_admin") {
     removeLocalStorageInfo(authKey);
     history.push("/login");
   }

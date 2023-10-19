@@ -65,14 +65,37 @@ export type IBooked = {
 
 export type IBlogPost = {
     id: number;
-   title: string;
-   description:string;
-   image:string;
-   topShortDescription:string
+    title: string;
+    description: string;
+    image: string;
+    topShortDescription: string
 }
 export type IFaqs = {
     id: string
-   question: string;
-   ans:string
+    question: string;
+    ans: string
 }
 
+export type IFeedback = {
+
+    id: number
+    userId: number
+    comment: string
+    suggestion: string
+    user: IUser
+    createAt: string
+    updateAt: string
+
+
+}
+
+
+export type IAddToCart = {
+    id: number;
+    userId: number;
+   serviceId:number;
+    user: IUser;
+    service: IService
+    createAt: string
+    updateAt: string
+}

@@ -15,7 +15,7 @@ function UserProfile() {
   const { role } = getUserInfo() as any;
   const history = useRouter();
   setTimeout(() => {
-    if (role !== "user") {
+    if (role !== "user" ) {
       removeLocalStorageInfo(authKey);
       history.push("/login");
     }

@@ -1,4 +1,4 @@
-import { IMeta, IUser } from "@/types";
+import { IFeedback, IMeta, IUser } from "@/types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi"
 
@@ -23,9 +23,9 @@ export const adminApi = baseApi.injectEndpoints({
             params: arg,
           };
         },
-        transformResponse: (response: IUser[], meta: IMeta) => {
+        transformResponse: (response: IFeedback[], meta: IMeta) => {
           return {
-            admins: response,
+            feedback: response,
             meta,
           };
         },

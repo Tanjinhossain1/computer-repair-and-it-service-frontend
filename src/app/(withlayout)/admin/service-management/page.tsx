@@ -72,7 +72,7 @@ export default function ServiceManagement() {
     delay: 600,
   });
 
-  if (!!debouncedSearchTerm) {
+  if (!!debouncedSearchTerm1) {
     query1["searchTerm"] = debouncedSearchTerm1;
   }
 
@@ -119,6 +119,9 @@ export default function ServiceManagement() {
     {
       title: "Description",
       dataIndex: "description",
+      render: function (data: any) {
+        return  <span>{data.slice(0,30)}....</span>
+      },
     },
     {
       title: "Created at",
