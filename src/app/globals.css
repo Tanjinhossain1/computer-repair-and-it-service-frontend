@@ -19,3 +19,27 @@
     border-image-source: linear-gradient(45deg, #f06, #9f6);
   }
 } 
+
+.open-hours-card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  animation: moveUpDown 2s infinite alternate;
+}
+
+.open-hours-card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  transition: transform 0.5s ease-in-out;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px); /* Adjust the value to control the movement distance */
+  }
+}

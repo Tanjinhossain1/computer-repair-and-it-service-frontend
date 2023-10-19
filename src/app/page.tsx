@@ -10,6 +10,7 @@ import FooterComponent from "@/component/Home/Footer";
 import Trusted from "@/component/Home/Trusted";
 import ChooseUs from "@/component/Home/ChooseUs";
 import dynamic from "next/dynamic";
+import OverViewSection from "@/component/Home/Overview";
 
 function HomePage() {
   return (
@@ -23,6 +24,7 @@ function HomePage() {
       </div>
       <UpComingServices />
       <EventsByCategory />
+      <OverViewSection />
       <Review />
       <LatestNews />
       <Trusted />

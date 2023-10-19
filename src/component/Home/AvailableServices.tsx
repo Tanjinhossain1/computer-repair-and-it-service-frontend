@@ -1,4 +1,4 @@
-import { useServicesQuery } from "@/redux/api/service";
+import { useAvailableServiceQuery, useServicesQuery } from "@/redux/api/service";
 import { Button, Card, Col, Input, InputNumber, Row } from "antd";
 import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
@@ -45,7 +45,7 @@ export default function AvailableServices() {
     debouncedMaxPrice,
     debouncedMinPrice
   );
-  const { data, isLoading } = useServicesQuery({ ...query });
+  const { data, isLoading } = useAvailableServiceQuery({ ...query });
   console.log("daata ", data);
   return (
     <div
