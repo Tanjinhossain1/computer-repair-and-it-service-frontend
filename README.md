@@ -31,16 +31,16 @@ password: 000000
    1. super admin can create, update and delete the normal user and admin,
    2.  super admin manage of all user and give the permission of admin that witch admin do witch task
    ### admin
-   1. admin can monetize the full website activity, admin can add,edit,delete the user account's
-   2. admin can add, edit,delete the services and update the specific field as needed
-   3. have a booking management system here show all of booking detail and update ass need and edited
-   4. here the booking change the status of accept,reject or done and make the controle management of social activitys of blog posts
+   1. The admin can monetize the full website activity, the admin can add, edit, and delete the user account's
+   2. The admin can add, edit, delete the services and update the specific field as needed
+   3. have a booking management system here to show all of the booking detail and update ass needed and edited
+   4. here the booking changes the status of accept, reject or done and make the control management of social activities of blog posts
 
    ### user
-   1. user can register and login there profile and update details then they can booked the available service and also
+   1. user can register and log in their profile and update their details then they can book the available services and also
    2. add to cart for after some time booking inside the booking show the status of the service
-   3. have the strong searchable service you can search of the field you have also filter with price
-   4. user can give the feedback,review rating also and user can see there booking services and also can cancel the booked if need
+   3. have a strong searchable service you can search the fields you have also filter with price
+   4. user can give feedback, review rating also and user can see their booking services and also can cancel the book if need
   
       
 
