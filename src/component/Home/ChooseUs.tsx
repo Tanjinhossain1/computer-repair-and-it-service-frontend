@@ -12,7 +12,7 @@ import React from "react";
 
 export default function ChooseUs() {
   return (
-    <div style={{ backgroundColor: "#fff7fe",paddingBottom:"30px" }}>
+    <div style={{ backgroundColor: "#F7EFE5",paddingBottom:"30px" }}>
       <div style={{ width: "80%", margin: "auto" }}>
         <h1 style={{ textAlign: "center" }}>WHY CHOOSE US</h1>
         <p style={{ textAlign: "center", marginTop: "30px" }}>

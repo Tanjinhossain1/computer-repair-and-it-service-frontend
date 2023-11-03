@@ -80,11 +80,11 @@ export default function AvailableServices() {
         padding: "10px",
         width: "90%",
         margin: "auto",
-        border: "3px solid #d6d6d6",
+        border: "6px solid #C780FA",
         borderRadius: 5,
         marginTop: "5px",
         boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
-        backgroundColor: "white",
+        backgroundColor: "#F7EFE5",
       }}
     >
       {isLoading ? (
@@ -146,10 +146,10 @@ export default function AvailableServices() {
             {data?.services && data?.services[0] ? (
               data?.services?.map((service: IService) => {
                 return (
-                  <Col key={service.id} xl={6}>
+                  <Col style={{marginBottom:"30px"}} key={service.id} xl={6}>
                     <Card
                       hoverable
-                      style={{ width: 300 }}
+                      style={{ width: 300,height: '100%' }}
                       cover={
                         <Image
                           width={150}
@@ -159,7 +159,7 @@ export default function AvailableServices() {
                         />
                       }
                       actions={[
-                        <Button key={service.id} type="primary">
+                        <Button   key={service.id} style={{backgroundColor:"#850345"}} type="primary">
                           <Link
                             style={{ color: "white" }}
                             href={`/booking/${service.id}`}
@@ -194,6 +194,27 @@ export default function AvailableServices() {
                       <div>
                         <strong>Location: </strong>
                         {service.serviceLocation}
+                      </div>
+                      <div style={{
+                          position: "absolute",
+                          bottom: 0,
+                          width: "100%",
+                        }}>
+                      {/* <Button   key={service.id} type="primary">
+                          <Link
+                            style={{ color: "white" }}
+                            href={`/booking/${service.id}`}
+                          >
+                            Book Now
+                          </Link>
+                        </Button>
+                        <Button
+                          onClick={() => addTOCart(service.id)}
+                          key={service.id}
+                          type="default"
+                        >
+                          Add to Cart
+                        </Button> */}
                       </div>
                     </Card>
                   </Col>

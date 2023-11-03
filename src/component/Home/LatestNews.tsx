@@ -28,7 +28,7 @@ export default function LatestNews() {
   ];
 
   return (
-    <div style={{ backgroundColor: "#f7f0f4",padding:"30px",marginTop:"20px" }}>
+    <div style={{ backgroundColor: "#F7EFE5",padding:"30px",marginTop:"20px" }}>
       <div style={{ width: "80%", margin: "auto" }}>
         <div>
           <h2 style={{ textAlign: "center", marginBottom: "10px" }}>

@@ -43,3 +43,16 @@
     transform: translateY(-20px); /* Adjust the value to control the movement distance */
   }
 }
+
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #A555EC;
+}
+
+.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s;
+}

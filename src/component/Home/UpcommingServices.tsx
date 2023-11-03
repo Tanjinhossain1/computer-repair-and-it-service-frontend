@@ -52,11 +52,11 @@ export default function UpComingServices() {
       padding: "10px",
       width: "80%",
       margin: "auto",
-      border: "3px solid #d6d6d6",
+      border: "6px solid #C780FA",
       borderRadius: 5,
       marginTop: "5px",
       boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
-      backgroundColor: "white",
+      backgroundColor: "#F7EFE5",
     }}
     >
       {isLoading ? (
@@ -94,7 +94,7 @@ export default function UpComingServices() {
                     <Col key={service.id} lg={6}>
                       <Card
                         hoverable
-                        style={{ width: 240 }}
+                        style={{ width: 240,height:290 }}
                         cover={
                           <Image
                             width={150}
@@ -105,9 +105,11 @@ export default function UpComingServices() {
                         }
                       >
                         <h2>{service.title}</h2>
-                        <Button type="primary" disabled style={{ width: "100%" }}>
+                      <div style={{position: 'absolute', bottom: 0, width: '80%' }}>
+                      <Button type="primary" disabled style={{ width: "100%",marginBottom:"20px" }}>
                           Coming Soon
                         </Button>
+                      </div>
                       </Card>
                     </Col>
                   );

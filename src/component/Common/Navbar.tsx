@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -26,7 +26,7 @@ export default function NavbarComponent() {
   const logOut = () => {
     removeLocalStorageInfo(authKey);
     router.push("/login");
-  };
+  }; 
   const items: MenuProps["items"] = [
     {
       key: "0",
@@ -39,11 +39,16 @@ export default function NavbarComponent() {
   ];
 
   const { role } = getUserInfo() as any;
+ 
   return (
     <AntHeader
       style={{
-        background: `linear-gradient(45deg, #0072ff, #00c6ff)`,
-      }}
+        background: `#A555EC`,
+        position: "sticky",
+        top: 0,
+        zIndex: "100",  
+        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)', 
+      }} 
     >
       <Row justify={"end"} align={"middle"}>
         <Col
@@ -55,38 +60,37 @@ export default function NavbarComponent() {
           </Link>
         </Col>
 
-        {
-          role && role === "user" ? 
-        <>
-        <Col
-        lg={1}
-        style={{ marginRight: 10, fontWeight: 600, color: "white" }}
-        >
-          <Link style={{ color: "white" }} href="/user-profile">
-            Profile
-          </Link> 
-        </Col>
+        {role && role === "user" ? (
+          <>
+            <Col
+              lg={1}
+              style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+            >
+              <Link style={{ color: "white" }} href="/user-profile">
+                Profile
+              </Link>
+            </Col>
 
-        <Col
-        lg={1.4}
-        style={{ marginRight: 10, fontWeight: 600, color: "white" }}
-        >
-          <Link style={{ color: "white" }} href="/add-to-cart">
-            AddToCart
-          </Link> 
-        </Col>
+            <Col
+              lg={1.4}
+              style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+            >
+              <Link style={{ color: "white" }} href="/add-to-cart">
+                AddToCart
+              </Link>
+            </Col>
 
-        <Col
-        lg={1.5}
-        style={{ marginRight: 10, fontWeight: 600, color: "white" }}
-        >
-          <Link style={{ color: "white" }} href={`/${role}/profile`}>
-            Dashboard
-          </Link> 
-        </Col></>
-          : null
-        }
-        { role ? null : (
+            <Col
+              lg={1.5}
+              style={{ marginRight: 10, fontWeight: 600, color: "white" }}
+            >
+              <Link style={{ color: "white" }} href={`/${role}/profile`}>
+                Dashboard
+              </Link>
+            </Col>
+          </>
+        ) : null}
+        {role ? null : (
           <>
             <Col
               lg={1}

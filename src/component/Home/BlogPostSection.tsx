@@ -9,13 +9,13 @@ export default function BlogPostSection() {
     const { data, isLoading } = useAllBlogPostsQuery({});
     console.log("dataaa ", data);
     return (
-      <div>
+      <div style={{color:"white"}}>
         {isLoading ? (
           <Spin style={{ marginTop: "200px" }} tip="Loading" size="large">
             <div className="content" />
           </Spin>
         ) : (
-          <div> 
+          <div > 
             <h1 style={{ textAlign: "center" }}> Blog Posts</h1>
   
             <div style={{margin:'30px'}}>

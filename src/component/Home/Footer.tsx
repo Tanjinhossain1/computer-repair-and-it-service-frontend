@@ -9,7 +9,7 @@ import { MailOutlined, RiseOutlined, ZoomInOutlined } from "@ant-design/icons";
 
 export default function FooterComponent() {
   return (
-    <Footer style={{ background: "#0e1033", padding: "40px 0" }}>
+    <Footer style={{ background: "#a555ec", padding: "40px 0" }}>
       <Row style={{ width: "80%", margin: "auto" }} gutter={[16, 16]}>
         <Col xs={24} sm={24} md={8} lg={8} xl={8}>
           <Image

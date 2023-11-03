@@ -30,11 +30,11 @@ export default function EventsByCategory() {
         padding: "10px",
         width: "80%",
         margin: "auto",
-        border: "3px solid #d6d6d6",
+        border: "6px solid #C780FA",
         borderRadius: 5,
         marginTop: "5px",
         boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
-        backgroundColor: "white",
+        backgroundColor: "#F7EFE5",
       }}
     >
       <h1 style={{ textAlign: "center", marginBottom: "10px" }}>
@@ -70,10 +70,10 @@ export default function EventsByCategory() {
             {data?.services && data?.services[0]
               ? data?.services.map((service: IService) => {
                   return (
-                    <Col key={service?.id} lg={6}>
+                    <Col style={{marginBottom:"20px"}} key={service?.id} lg={6}>
                       <Card
                         hoverable
-                        style={{ width: 240 }}
+                        style={{ width: 240,height:260 }}
                         cover={
                           <Image
                             width={150}
@@ -83,9 +83,13 @@ export default function EventsByCategory() {
                           />
                         }
                       >
-                        <Button disabled={service.status === "up-coming"} type="primary" style={{ width: "100%" }}>
+                        
+                     <h4>{service.title}</h4>
+                     <div style={{position: 'absolute', bottom: 0, width: '80%' }}>
+                        <Button disabled={service.status === "up-coming"} type="primary" style={{ width: "100%",marginBottom:"20px" }}>
                            {service.status === "up-coming" ? "Up Coming " : "Book"}
                         </Button>
+                        </div>
                       </Card>
                     </Col>
                   );

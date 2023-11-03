@@ -17,24 +17,28 @@ function HomePage() {
   return (
     <div>
       <NavbarComponent />
-      <div style={{backgroundColor:"#e8e8e8"}}>
-      <div>
-        <HeaderComponent />
-      </div>
-      <div style={{marginTop:"-150px"}}>
-        <AvailableServices />
-      </div>
-      <UpComingServices />
-      <EventsByCategory />
-      <OverViewSection />
-      <Review />
-      <LatestNews />
-      <Trusted />
-      <BlogPostSection />
-      <ChooseUs />
-      <FooterComponent />
+      <div style={{ backgroundColor: "#e8e8e8" }}>
+        <div>
+          <HeaderComponent />
+        </div>
+        <div>
+          <div style={{ backgroundColor: "#A555EC" }}>
+            <div style={{ marginTop: "-150px" }}>
+              <AvailableServices />
+            </div>
+          <UpComingServices />
+          <EventsByCategory />
+          <OverViewSection />
+          <Review />
+          <LatestNews />
+          <Trusted />
+          <BlogPostSection />
+          <ChooseUs />
+          <FooterComponent />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-export default dynamic (() => Promise.resolve(HomePage), {ssr: false})
+export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
