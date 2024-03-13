@@ -1,11 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Form, Input, Radio, Statistic, Typography } from "antd";
+import { getUserInfo } from "@/services/auth.service";
+import { useCreateFeedbackMutation } from "@/redux/api/feedBackApi";
+import { message } from 'antd';
 
 const { Title, Paragraph } = Typography;
 
 const OverViewSection = () => {
   const [clientCount, setClientCount] = useState(0);
+  const { userId } = getUserInfo() as any;
 
+  const [createFeedback] = useCreateFeedbackMutation()
+  const handleSubmit = async (datas: any) => {
+    const data = datas.target
+    message.loading("Creating.....", 1);
+    if(userId){
+      console.log('datadatadata   ', data.comments)
+      try {
+        if(data?.comments.value || data?.improvements.value){
+          await createFeedback({ body:{
+            userId: userId, 
+          comment: data?.comments.value,
+          suggestion: data?.improvements.value, 
+          } });
+          message.success("Create Survey successfully", 1);
+        }
+      } catch (err: any) {
+        message.error(err.message);
+      }
+    }else{
+      message.error("Login First Dare");
+    }
+  };
   useEffect(() => {
     // Simulate fetching the initial client count from your data source
     const initialClientCount = 150; // Replace with your actual client count
@@ -37,8 +63,7 @@ const OverViewSection = () => {
           className="open-hours-card"
           style={{ backgroundColor: "#F7EFE5", marginRight:"30px"}}
         >
-          <Title level={5}>Sed ut perspiciatis unde omnis</Title>
-          <p>This is Complete friendly services center</p>
+          <Title level={5}>This is Complete friendly services center</Title> 
           <Paragraph>
             Mon-Fri: 9 AM – 6 PM
             <br />
@@ -49,7 +74,7 @@ const OverViewSection = () => {
         </Card>
         <div>
           <Card  title="Survey">
-            <Form>
+            <Form onSubmitCapture={handleSubmit} >
               <Form.Item
                 name="overallSatisfaction"
                 label="Overall Satisfaction"
@@ -108,7 +133,7 @@ const OverViewSection = () => {
               </Form.Item>
 
               <Form.Item name="improvements" label="Improvements">
-                <Input.TextArea />
+                <Input.TextArea name="improvements" />
               </Form.Item>
 
               <Form.Item name="recommendation" label="Recommendation">
@@ -122,7 +147,7 @@ const OverViewSection = () => {
               </Form.Item>
 
               <Form.Item name="comments" label="Comments and Suggestions">
-                <Input.TextArea />
+                <Input.TextArea name="comments" />
               </Form.Item>
 
               <Form.Item>

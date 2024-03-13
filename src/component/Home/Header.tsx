@@ -15,7 +15,7 @@ const HeaderComponent = () => {
         <h2 style={{color: 'white'}}>Unable to work? Your computer freezes?</h2>
         <h1 style={{color: 'white'}}>We{`'`}ll help you get back to work.</h1>
         <h1 style={{color: 'white'}}>Fast and Qualitatively.</h1>
-       <Link href='/services'> <Button style={{backgroundColor:"#850345"}} type="primary">Services</Button></Link>
+       {/* <Link href='/services'> <Button style={{backgroundColor:"#850345"}} type="primary">Services</Button></Link> */}
       </div>
       <div className="image-container">
         <img src="https://demo.brothersthemes.com/comrepair/wp-content/uploads/sites/2/2017/04/macbook-748857_1920-2-1-300x300.png" alt="Computer Services" />

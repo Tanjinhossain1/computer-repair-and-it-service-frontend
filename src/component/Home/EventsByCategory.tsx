@@ -25,19 +25,23 @@ export default function EventsByCategory() {
   const uniqueCategories = [];
   const seenCategories = new Set();
   return (
+    <> {isLoading || isLoading1 ? (
+      <Spinner color="white" />
+    ) : (
     <div
       style={{
         padding: "10px",
         width: "80%",
         margin: "auto",
-        border: "6px solid #C780FA",
+        // border: "6px solid #C780FA",
         borderRadius: 5,
-        marginTop: "5px",
+        marginTop: "20px",
         boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
         backgroundColor: "#F7EFE5",
+        animation: "moveUpDown 3s infinite alternate"
       }}
     >
-      <h1 style={{ textAlign: "center", marginBottom: "10px" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "10px",color:'#d085d4' }}>
         Events By Category Services
       </h1>
       <Row gutter={50}>
@@ -63,9 +67,7 @@ export default function EventsByCategory() {
       <br />
       <br />
       <Row>
-        {isLoading || isLoading1 ? (
-          <Spinner />
-        ) : (
+       
           <>
             {data?.services && data?.services[0]
               ? data?.services.map((service: IService) => {
@@ -96,8 +98,9 @@ export default function EventsByCategory() {
                 })
               : null}
           </>
-        )}
       </Row>
     </div>
+        )}
+    </>
   );
 }

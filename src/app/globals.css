@@ -35,6 +35,14 @@
   transition: transform 0.5s ease-in-out;
 }
 
+@keyframes moveLeftRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(20px); /* Adjust the distance for desired movement */
+  }
+}
 @keyframes moveUpDown {
   0% {
     transform: translateY(0);
