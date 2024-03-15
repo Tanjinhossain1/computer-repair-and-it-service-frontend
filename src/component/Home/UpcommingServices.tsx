@@ -105,7 +105,7 @@ export default function UpComingServices() {
                           />
                         }
                       >
-                        <h2>{service.title}</h2>
+                        <h4>{service.title}</h4>
                       <div style={{position: 'absolute', bottom: 0, width: '80%' }}>
                       <Button type="primary" disabled style={{ width: "100%",marginBottom:"20px" }}>
                           Coming Soon

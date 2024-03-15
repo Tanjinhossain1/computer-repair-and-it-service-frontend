@@ -9,7 +9,7 @@ export default function BlogPostSection() {
     const { data, isLoading } = useAllBlogPostsQuery({});
     console.log("dataaa ", data);
     return (
-      <div style={{color:"white"}}>
+      <div style={{color:"white",marginTop:"30px",borderTop:"2px solid #F7EFE5"}}>
         {isLoading ? (
           <Spin style={{ marginTop: "200px" }} tip="Loading" size="large">
             <div className="content" />
@@ -39,7 +39,7 @@ export default function BlogPostSection() {
                               >
                                 <Meta
                                   title={blogPost.title}
-                                  description={blogPost.description.slice(0,50)}
+                                  description={`${blogPost.description.slice(0,50)}...`}
                                 />
                               </Card>
                               </Link>

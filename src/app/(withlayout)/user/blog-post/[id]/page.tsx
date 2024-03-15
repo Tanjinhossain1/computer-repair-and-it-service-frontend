@@ -32,7 +32,7 @@ export default function ViewBlogPost() {
           <br />
           <br />
           <div style={{ width: "80%", margin: "auto", textAlign: "left" }}>
-            <p>{data.topShortDescription}</p>
+            <h3>{data.topShortDescription}</h3>
           </div>
           <div
             style={{
@@ -46,8 +46,8 @@ export default function ViewBlogPost() {
           </div>
           <br />
           <br />
-          <div style={{ width: "80%", margin: "auto", textAlign: "left" }}>
-            <h5>{data.description}</h5>
+          <div style={{ width: "80%", margin: "auto", textAlign: "left" , fontSize:20}}>
+            <p >{data.description}</p>
           </div>
         </div>
       )}

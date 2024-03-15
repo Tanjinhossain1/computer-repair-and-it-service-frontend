@@ -11,18 +11,18 @@ export default function LatestNews() {
     },
     {
       id: 2,
-      title: "Upcoming Tech Conference",
+      title: "Upcoming Laptop Services Offered",
       content: "Join us at the tech conference next month.",
     },
     {
       id: 3,
-      title: "Upcoming Tech Conference",
-      content: "Join us at the tech conference next month.",
+      title: "Upcoming Keyboard Services Offered",
+      content: "Join us at the tech we give keyboard services also.",
     },
     {
       id: 4,
-      title: "Upcoming Tech Conference",
-      content: "Join us at the tech conference next month.",
+      title: "Upcoming Mouse Services Offered",
+      content: "Join us at the C - S we provide mouse services also",
     },
     // Add more news items as needed
   ];

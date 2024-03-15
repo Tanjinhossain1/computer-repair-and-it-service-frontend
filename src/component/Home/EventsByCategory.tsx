@@ -25,82 +25,110 @@ export default function EventsByCategory() {
   const uniqueCategories = [];
   const seenCategories = new Set();
   return (
-    <> {isLoading || isLoading1 ? (
-      <Spinner color="white" />
-    ) : (
-    <div
-      style={{
-        padding: "10px",
-        width: "80%",
-        margin: "auto",
-        // border: "6px solid #C780FA",
-        borderRadius: 5,
-        marginTop: "20px",
-        boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
-        backgroundColor: "#F7EFE5",
-        animation: "moveUpDown 3s infinite alternate"
-      }}
-    >
-      <h1 style={{ textAlign: "center", marginBottom: "10px",color:'#d085d4' }}>
-        Events By Category Services
-      </h1>
-      <Row gutter={50}>
-        {data1?.services && data1?.services[0]
-          ? data1?.services.map((service: IService) => {
-              const category = service.category;
-              if (!seenCategories.has(category)) {
-                seenCategories.add(category);
-                uniqueCategories.push(category);
-                return (
-                  <Col key={category}>
-                    <Button onClick={() => setSearchTerm(category)}>
-                      {category}
-                    </Button>
-                  </Col>
-                );
-              }
-              return null;
-            })
-          : null}
-      </Row>
-
-      <br />
-      <br />
-      <Row>
-       
-          <>
-            {data?.services && data?.services[0]
-              ? data?.services.map((service: IService) => {
-                  return (
-                    <Col style={{marginBottom:"20px"}} key={service?.id} lg={6}>
-                      <Card
-                        hoverable
-                        style={{ width: 240,height:260 }}
-                        cover={
-                          <Image
-                            width={150}
-                            height={150}
-                            alt="example"
-                            src={service?.image}
-                          />
-                        }
-                      >
-                        
-                     <h4>{service.title}</h4>
-                     <div style={{position: 'absolute', bottom: 0, width: '80%' }}>
-                        <Button disabled={service.status === "up-coming"} type="primary" style={{ width: "100%",marginBottom:"20px" }}>
-                           {service.status === "up-coming" ? "Up Coming " : "Book"}
+    <>
+      {" "}
+      {isLoading || isLoading1 ? (
+        <Spinner color="white" />
+      ) : (
+        <div
+          style={{
+            padding: "10px",
+            width: "80%",
+            margin: "auto",
+            // border: "6px solid #C780FA",
+            borderRadius: 5,
+            marginTop: "20px",
+            boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
+            backgroundColor: "#F7EFE5",
+            animation: "moveUpDown 3s infinite alternate",
+          }}
+        >
+          <h1
+            style={{
+              textAlign: "center",
+              marginBottom: "10px",
+              color: "#d085d4",
+            }}
+          >
+            Events By Category Services
+          </h1>
+          <Row gutter={50}>
+         
+          <Col>
+                        <Button onClick={() => setSearchTerm('')}>
+                        All
                         </Button>
-                        </div>
-                      </Card>
-                    </Col>
-                  );
+                      </Col>
+            {data1?.services && data1?.services[0]
+              ? data1?.services.map((service: IService) => {
+                  const category = service.category;
+                  if (!seenCategories.has(category)) {
+                    seenCategories.add(category);
+                    uniqueCategories.push(category);
+                    return (
+                      <Col key={category}>
+                        <Button onClick={() => setSearchTerm(category)}>
+                          {category}
+                        </Button>
+                      </Col>
+                    );
+                  }
+                  return null;
                 })
               : null}
-          </>
-      </Row>
-    </div>
-        )}
+          </Row>
+
+          <br />
+          <br />
+          <Row>
+            <>
+              {data?.services && data?.services[0]
+                ? data?.services.map((service: IService) => {
+                    return (
+                      <Col
+                        style={{ marginBottom: "20px" }}
+                        key={service?.id}
+                        lg={6}
+                      >
+                        <Card
+                          hoverable
+                          style={{ width: 240, height: 280 }}
+                          cover={
+                            <Image
+                              width={150}
+                              height={150}
+                              alt="example"
+                              src={service?.image}
+                            />
+                          }
+                        >
+                          <h4>{service.title}</h4>
+                          <div
+                            style={{
+                              position:'absolute',
+                              bottom: 0,
+                              width: "80%",
+                            }}
+                          >
+                            <Button
+                              disabled={service.status === "up-coming"}
+                              type="primary"
+                              style={{ width: "100%",marginBottom:"10px" }}
+                            >
+                              {service.status === "up-coming"
+                                ? "Up Coming "
+                                : "Book"}
+                            </Button>
+                          </div> 
+                        </Card>
+                      </Col>
+                    );
+                  })
+                : null}
+            </>
+          </Row>
+        </div>
+      )}
     </>
   );
 }
