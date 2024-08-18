@@ -21,7 +21,7 @@ export default function Review() {
     <Spinner />
   ) : (
     <div style={{ width: "50%", margin: "auto", marginTop: "10px" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "30px", color: "white" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "30px" }}>
         Client Review
       </h1>
       

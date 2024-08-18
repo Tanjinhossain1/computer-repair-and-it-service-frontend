@@ -28,8 +28,8 @@ export default function Trusted() {
   ];
   return (
     <div style={{width:"60%",margin:"auto",marginTop:"20px",marginBottom:"30px",color:"whitesmoke"}}>
-      <h1 style={{ textAlign: "center" }}>WE ARE TRUSTED BY</h1>
-    <h4 style={{ textAlign: "center",marginTop:"20px" }}>Our regular customers</h4>
+      <h1 style={{ textAlign: "center" ,color:"black"}}>WE ARE TRUSTED BY</h1>
+    <h4 style={{ textAlign: "center",marginTop:"20px",color:"black" }}>Our regular customers</h4>
       
       <Row style={{margin:0, marginTop:"30px",width:"100%"}} gutter={80}>
         {trust.map((e: any) => {

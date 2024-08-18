@@ -17,12 +17,12 @@ function HomePage() {
   return (
     <div>
       <NavbarComponent />
-      <div style={{ backgroundColor: "#e8e8e8" }}>
+      <div style={{ backgroundColor: "#200838" }}>
         <div>
           <HeaderComponent />
         </div>
         <div>
-          <div style={{ backgroundColor: "#A555EC" }}>
+          <div style={{ backgroundColor: "#e0e0e0"}}>
             <div style={{ marginTop: "-150px" }}>
               <AvailableServices />
             </div>

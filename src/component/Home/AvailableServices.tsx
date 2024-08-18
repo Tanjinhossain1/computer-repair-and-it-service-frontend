@@ -86,12 +86,12 @@ export default function AvailableServices() {
       ) : (
         <div
           style={{
+          
             padding: "10px",
             width: "90%",
-            margin: "auto",
+            margin: "auto", 
             // border: "6px solid #C780FA",
-            borderRadius: 5,
-            marginTop: "5px",
+            borderRadius: 5, 
             boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1)`,
             backgroundColor: "#F7EFE5",
             animation: "moveUpDown 2s infinite alternate",

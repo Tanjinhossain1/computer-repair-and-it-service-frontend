@@ -16,7 +16,7 @@ export default function BlogPostSection() {
           </Spin>
         ) : (
           <div > 
-            <h1 style={{ textAlign: "center" }}> Blog Posts</h1>
+            <h1 style={{ textAlign: "center",color:'black' }}> Blog Posts</h1>
   
             <div style={{margin:'30px'}}>
               <Row gutter={50}>
